@@ -1,7 +1,12 @@
+import "./App.css";
+import RightBar from "./components/RightBar";
+import SideB from "./components/SideB";
+
 function App() {
   return (
     <div className="App">
-      Hello World
+      <SideB />
+      <RightBar />
     </div>
   );
 }
