@@ -28,7 +28,12 @@
     border: 1px solid #2b367416;
 }
 
-.chart-container p {
+.bottom {
+    display: flex;
+    margin-top: 20px;
+}
+
+.bottom p {
     font-weight: 700;
 }
 
@@ -42,9 +47,29 @@
     width: 60%;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    gap: 20px;
+    /* border: 1px solid black; */
+}
+
+.right-container-col2 {
+    margin-left: -100px;
+    /* border: 1px solid red; */
+    min-height: 283.2px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
+
+.container {
+    width: 100%;
+    min-height: 283.2px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #2b367416;
+    padding: 20px;
+}
+
 
 @media (max-width: 500px) {
     .right-container-col1 {
@@ -68,6 +93,10 @@
 
     .right-container-title {
         padding: 10px 10px;
+    }
+
+    .bottom {
+        flex-direction: column;
     }
 
 }
