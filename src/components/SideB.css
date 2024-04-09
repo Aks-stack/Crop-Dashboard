@@ -1,0 +1,50 @@
+.sidebar {
+    background-color: #262527;
+    color: #8D8598;
+    height: 100vh;
+    width: 80px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.icons {
+    color: grey;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.icons:hover {
+    background: #372C44;
+    color: #D8BCFF;
+    transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.routes {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+
+.user {
+    margin-top: 50px;
+}
+
+.top-section {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
