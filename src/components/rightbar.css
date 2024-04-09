@@ -4,6 +4,7 @@
     display: flex;
     color: #2B3674;
     padding: 25px 20px;
+    flex-direction: column;
 }
 
 .right-container-title {
@@ -11,8 +12,54 @@
     font-size: 20px;
 }
 
+.chart {
+    padding: 10px;
+    overflow: hidden;
+    height: 200px;
+    /* border: 1px solid red; */
+}
+
+.chart-container {
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid #2b367416;
+}
+
+.chart-container p {
+    font-weight: 700;
+}
+
+.chart-container-top {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .right-container-col1 {
-    width: 100px;
-    height: 100px;
-    background-color: #FFFFFF;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+@media (max-width: 500px) {
+    .right-container-col1 {
+        width: 95%;
+    }
+
+    .chart-container {
+        width: 100%;
+    }
+
+    .chart {
+        width: 100%;
+    }
+
+    .right-container {
+        padding: 0px 0px;
+    }
+
 }
