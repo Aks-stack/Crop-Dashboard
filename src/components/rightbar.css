@@ -1,0 +1,18 @@
+.right-container {
+    background-color: #F4F7FE;
+    width: 100%;
+    display: flex;
+    color: #2B3674;
+    padding: 25px 20px;
+}
+
+.right-container-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.right-container-col1 {
+    width: 100px;
+    height: 100px;
+    background-color: #FFFFFF;
+}
