@@ -1,5 +1,6 @@
 .right-container {
     background-color: #F4F7FE;
+    /* background-color: #F4FFF2; */
     width: 100%;
     display: flex;
     color: #2B3674;
@@ -48,6 +49,9 @@
 @media (max-width: 500px) {
     .right-container-col1 {
         width: 95%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .chart-container {
@@ -59,7 +63,7 @@
     }
 
     .right-container {
-        padding: 0px 0px;
+        padding: 10px;
     }
 
 }

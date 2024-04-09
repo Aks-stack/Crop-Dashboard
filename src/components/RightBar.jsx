@@ -13,13 +13,18 @@ function RightBar() {
     ];
     const options = {
         width: "450px",
-        curveType: "function",
+        curveType: "",
         legend: { position: "bottom" },
+        chartArea: { left: "10%", width: "85%", height: "70%" },
     };
+
     return (
         <div className='right-container'>
             <div className='right-container-title'>Main Dashboard</div>
+
             <div className='right-container-col1'>
+
+                {/* Chart - 1 */}
                 <div className='chart-container'>
                     <div className='chart-container-top'>
                         <p>Soil Temperature & Moisture</p>
@@ -33,6 +38,8 @@ function RightBar() {
                         options={options}
                     />
                 </div>
+
+                {/* Chart - 2 */}
                 <div className='chart-container'>
                     <div className='chart-container-top'>
                         <p>N P K Data</p>
@@ -46,6 +53,8 @@ function RightBar() {
                         options={options}
                     />
                 </div>
+
+                {/* Chart - 3 */}
                 <div className='chart-container'>
                     <div className='chart-container-top'>
                         <p>Temperature & Humidity</p>
@@ -59,6 +68,8 @@ function RightBar() {
                         options={options}
                     />
                 </div>
+
+                {/* Chart - 4 */}
                 <div className='chart-container'>
                     <div className='chart-container-top'>
                         <p>PH Value</p>
@@ -73,7 +84,6 @@ function RightBar() {
                     />
                 </div>
             </div>
-
         </div>
     )
 }
