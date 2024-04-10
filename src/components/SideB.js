@@ -28,14 +28,14 @@ export default function SideB(props) {
     return (
         <div className='sidebar'>
             <div className="top-section">
-                <img src={logo} style={{ width: '40px', height: '40px' }} alt='/' />
+                <Link to="/">
+                    <img src={logo} style={{ width: '40px', height: '40px' }} alt='/' />
+                </Link>
             </div>
             <div className="routes">
                 <Link to="/">
                     <div className="icons">
-                        <a href='/' className='link'>
                             <IconHome />
-                        </a>
                     </div>
                 </Link>
                 <Link to="/fertilizer">
