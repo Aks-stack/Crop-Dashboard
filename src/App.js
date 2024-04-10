@@ -2,6 +2,11 @@ import './App.css'
 import SideB from "./components/SideB";
 import RightBar from "./components/RightBar";
 import { useState } from 'react';
+import {
+  BrowserRouter as
+    Router, Routes, Route
+} from "react-router-dom"
+// import About from './components/About';
 
 function App() {
 
@@ -9,8 +14,13 @@ function App() {
 
   return (
     <div className="App">
-      <SideB Mode={Mode} setMode={setMode} />
-      <RightBar Mode={Mode} setMode={setMode}/>
+      <Router>
+        <SideB Mode={Mode} setMode={setMode} />
+        <Routes>
+          <Route index element={<RightBar Mode={Mode} setMode={setMode} />}></Route>
+          {/* <Route path='about' element={<About/>}></Route> */}
+        </Routes>
+      </Router>
     </div>
   );
 }
