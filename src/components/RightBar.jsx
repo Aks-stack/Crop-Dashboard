@@ -133,7 +133,7 @@ function RightBar(props) {
                                 imag.map((val) => {
                                     return (
                                         <div className='img-container'>
-                                            <img src={val.url} />
+                                            <img src={val.url} alt=''/>
                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <span>{val.name}</span>
                                                 <span>{val.percentage}%</span>
@@ -148,7 +148,7 @@ function RightBar(props) {
                     <div className='temperature container'>
                         <div className='chart-container-top'>
                             <p>Temperature Prediction</p>
-
+                            <img src={tempPredict} height={25} width={25} alt="" />
                         </div>
                     </div>
                 </div>
