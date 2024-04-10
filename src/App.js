@@ -6,7 +6,7 @@ import {
   BrowserRouter as
     Router, Routes, Route
 } from "react-router-dom"
-// import About from './components/About';
+import About from './components/About';
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         <SideB Mode={Mode} setMode={setMode} />
         <Routes>
           <Route index element={<RightBar Mode={Mode} setMode={setMode} />}></Route>
-          {/* <Route path='about' element={<About/>}></Route> */}
+          <Route path='about' element={<About/>}></Route>
         </Routes>
       </Router>
     </div>
