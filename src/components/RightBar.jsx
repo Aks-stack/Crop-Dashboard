@@ -8,13 +8,27 @@ import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
 
 
-function RightBar() {
+function RightBar(props) {
 
     const options = {
         width: "450px",
         curveType: "",
-        legend: { position: "bottom" },
+        legend: { 
+            position: "bottom", 
+            textStyle: {color: props.Mode?'grey':'black'} 
+        },
         chartArea: { left: "10%", width: "85%", height: "70%" },
+        backgroundColor: props.Mode?"#111C44":'white',
+        hAxis:{
+            baselineColor: props.Mode?'grey':'black',
+            // gridlineColor: props.Mode?'white':'black',
+            textStyle:{color: props.Mode?'grey':'black'}
+          },
+        vAxis:{
+            baselineColor: props.Mode?'grey':'black',
+            // gridlineColor: props.Mode?'white':'black',
+            textStyle:{color: props.Mode?'grey':'black'}
+          }
     };
 
     return (
