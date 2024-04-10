@@ -18,7 +18,7 @@ function RightBar(props) {
             textStyle: {color: props.Mode?'grey':'black'} 
         },
         chartArea: { left: "10%", width: "85%", height: "70%" },
-        backgroundColor: props.Mode?"#111c44c7":'white',
+        backgroundColor: props.Mode?"#111C44":'white',
         hAxis:{
             baselineColor: props.Mode?'grey':'black',
             // gridlineColor: props.Mode?'white':'black',
