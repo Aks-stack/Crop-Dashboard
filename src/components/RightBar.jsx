@@ -10,25 +10,46 @@ import tempPredict from "../assets/sun_2698213.png";
 
 function RightBar(props) {
 
+    const imag = [
+        {
+            name: "Potato",
+            url: "https://img.freepik.com/free-photo/rustic-unpeeled-potatoes-desks_144627-3901.jpg?t=st=1712753748~exp=1712757348~hmac=178cdd27a843b6931dae696c8edc5135edaa671ae71d3a5ae3ee1f1abaaa0a07&w=996",
+            percentage: 78
+        },
+        {
+            name: "Rice",
+            url: "https://img.freepik.com/free-photo/top-view-raw-rice-inside-plate-dark-desk_179666-27235.jpg?t=st=1712752730~exp=1712756330~hmac=468057fc9411797e73bc80ab3278aecae1623df06f37424a23a7dc8998079f5a&w=996",
+            percentage: 14
+        }
+        ,
+        {
+            name: "Wheat",
+            url:
+                "https://img.freepik.com/free-photo/wheat-field-waving-wind-field-background_1268-30616.jpg?t=st=1712753654~exp=1712757254~hmac=9966fa288cd459031bbbcedd2a2d6c17e8c8453f6b3c4dee3aff9ce18583233b&w=1060",
+            percentage: 8
+
+        }]
+
+
     const options = {
         width: "450px",
         curveType: "",
-        legend: { 
-            position: "bottom", 
-            textStyle: {color: props.Mode?'grey':'black'} 
+        legend: {
+            position: "bottom",
+            textStyle: { color: props.Mode ? 'grey' : 'black' }
         },
         chartArea: { left: "10%", width: "85%", height: "70%" },
-        backgroundColor: props.Mode?"#111C44":'white',
-        hAxis:{
-            baselineColor: props.Mode?'grey':'black',
+        backgroundColor: props.Mode ? "#111C44" : 'white',
+        hAxis: {
+            baselineColor: props.Mode ? 'grey' : 'black',
             // gridlineColor: props.Mode?'white':'black',
-            textStyle:{color: props.Mode?'grey':'black'}
-          },
-        vAxis:{
-            baselineColor: props.Mode?'grey':'black',
+            textStyle: { color: props.Mode ? 'grey' : 'black' }
+        },
+        vAxis: {
+            baselineColor: props.Mode ? 'grey' : 'black',
             // gridlineColor: props.Mode?'white':'black',
-            textStyle:{color: props.Mode?'grey':'black'}
-          }
+            textStyle: { color: props.Mode ? 'grey' : 'black' }
+        }
     };
 
     return (
@@ -107,11 +128,27 @@ function RightBar(props) {
                             <p>Crop Recommendation</p>
                             <img src={plantPredict} height={25} width={25} alt="" />
                         </div>
+                        <div className="recommendation-panel">
+                            {
+                                imag.map((val) => {
+                                    return (
+                                        <div className='img-container'>
+                                            <img src={val.url} />
+                                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                <span>{val.name}</span>
+                                                <span>{val.percentage}%</span>
+                                            </div>
+                                        </div >
+                                    )
+
+                                })
+                            }
+                        </div>
                     </div>
                     <div className='temperature container'>
                         <div className='chart-container-top'>
                             <p>Temperature Prediction</p>
-                            <img src={tempPredict} height={25} width={25} alt="" />
+
                         </div>
                     </div>
                 </div>
