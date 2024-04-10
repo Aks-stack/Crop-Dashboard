@@ -1,18 +1,15 @@
 import React from 'react'
 import { Chart } from "react-google-charts";
+import { data1, data2, data3, data4 } from '../data';
+
 import "./rightbar.css";
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
 
+
 function RightBar() {
-    const data1 = [
-        ["Year", "Temperature", "Moisture"],
-        ["2004", 1000, 400],
-        ["2005", 1170, 460],
-        ["2006", 660, 1120],
-        ["2007", 1030, 540],
-    ];
+
     const options = {
         width: "450px",
         curveType: "",
@@ -53,7 +50,7 @@ function RightBar() {
                             className='chart'
                             chartType="LineChart"
                             style={{ width: "100%" }}
-                            data={data1}
+                            data={data2}
                             options={options}
                         />
                     </div>
@@ -68,7 +65,7 @@ function RightBar() {
                             className='chart'
                             chartType="LineChart"
                             style={{ width: "100%" }}
-                            data={data1}
+                            data={data3}
                             options={options}
                         />
                     </div>
@@ -83,7 +80,7 @@ function RightBar() {
                             className='chart'
                             chartType="LineChart"
                             style={{ width: "100%" }}
-                            data={data1}
+                            data={data4}
                             options={options}
                         />
                     </div>

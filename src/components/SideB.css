@@ -2,7 +2,9 @@
     background-color: #262527;
     color: #8D8598;
     width: 80px;
-    min-height: 100vh;
+    height: 100vh;
+    position: sticky;
+    inset: 0;
 }
 
 a {
