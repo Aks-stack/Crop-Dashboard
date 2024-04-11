@@ -19,7 +19,7 @@ a {
 .icons {
     color: grey;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: x-large;
     cursor: pointer;
 }
@@ -27,7 +27,13 @@ a {
 .icons:hover {
     background: #372C44;
     color: #D8BCFF;
-    transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) !important;
+}
+
+.active {
+    background: #372C44;
+    color: #D8BCFF !important;
+    border-radius: 10px;
 }
 
 .routes {
