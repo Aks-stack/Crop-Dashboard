@@ -35,7 +35,7 @@ export default function SideB(props) {
             <div className="routes">
                 <NavLink activeClassName="active" to="/">
                     <div className="icons">
-                            <IconHome />
+                        <IconHome />
                     </div>
                 </NavLink>
                 <NavLink activeClassName="active" to="/fertilizer">
@@ -48,7 +48,7 @@ export default function SideB(props) {
                         </svg> */}
                     </div>
                 </NavLink>
-                <NavLink activeClassName='active' to="/about" style={{transition:"0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) !important"}}>
+                <NavLink activeClassName='active' to="/about" style={{ transition: "0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) !important" }}>
                     <div className="icons">
                         <IconInfo />
                     </div>

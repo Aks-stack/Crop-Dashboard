@@ -7,6 +7,7 @@ export default function About() {
             <div className="title">
                 About Us
             </div>
+
             <div className="content">
                 <div className="card">
                     <div className="card-title">

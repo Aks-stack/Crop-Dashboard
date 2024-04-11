@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Chart } from "react-google-charts";
-import { data1, data2, data3, data4 } from '../data';
+import { data1, data2, data3 } from '../data';
+import { data4 } from '../data';
 
 import "./rightbar.css";
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
 
+function RightBar({ Mode }) {
 
-function RightBar(props) {
+    const [updateData1, setUpdateData1] = useState(data1);
+    const [count, setCount] = useState(1);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setUpdateData1([...updateData1, [count, 26.2, 140]])
+            setCount(count + 1);
+        }, 1000)
+    }, [count])
+
+    // console.log(count)
 
     const imag = [
         {
@@ -36,19 +48,19 @@ function RightBar(props) {
         curveType: "",
         legend: {
             position: "bottom",
-            textStyle: { color: props.Mode ? 'grey' : 'black' }
+            textStyle: { color: Mode ? 'grey' : 'black' }
         },
         chartArea: { left: "10%", width: "85%", height: "70%" },
-        backgroundColor: props.Mode ? "#111C44" : 'white',
+        backgroundColor: Mode ? "#111C44" : 'white',
         hAxis: {
-            baselineColor: props.Mode ? 'grey' : 'black',
-            // gridlineColor: props.Mode?'white':'black',
-            textStyle: { color: props.Mode ? 'grey' : 'black' }
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
         },
         vAxis: {
-            baselineColor: props.Mode ? 'grey' : 'black',
-            // gridlineColor: props.Mode?'white':'black',
-            textStyle: { color: props.Mode ? 'grey' : 'black' }
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
         }
     };
 
@@ -70,7 +82,7 @@ function RightBar(props) {
                             className='chart'
                             chartType="LineChart"
                             style={{ width: "100%" }}
-                            data={data1}
+                            data={updateData1}
                             options={options}
                         />
                     </div>
@@ -130,10 +142,15 @@ function RightBar(props) {
                         </div>
                         <div className="recommendation-panel">
                             {
-                                imag.map((val) => {
+                                imag.map((val, index) => {
                                     return (
+<<<<<<< HEAD
                                         <div className='img-container'>
                                             <img src={val.url} alt=''/>
+=======
+                                        <div className='img-container' key={index}>
+                                            <img src={val.url} alt='' />
+>>>>>>> dash-v4
                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <span>{val.name}</span>
                                                 <span>{val.percentage}%</span>
