@@ -7,6 +7,7 @@ import {
     Router, Routes, Route
 } from "react-router-dom"
 import About from './components/About';
+import Fertilizer from './components/Fertilizer';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
         <SideB Mode={Mode} setMode={setMode} />
         <Routes>
           <Route index element={<RightBar Mode={Mode} setMode={setMode} />}></Route>
-          <Route path='about' element={<About/>}></Route>
+          <Route path='about' element={<About />}></Route>
+          <Route path='fertilizer' element={<Fertilizer Mode={Mode} />}></Route>
         </Routes>
       </Router>
     </div>

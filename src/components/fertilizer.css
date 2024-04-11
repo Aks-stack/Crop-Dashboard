@@ -15,30 +15,30 @@
     border-bottom: 1px solid #2b36741d;
 }
 
-.content {
+.main-content {
     display: flex;
-    min-height: 90%;
-    margin-top: 20px;
-    gap: 25px;
+    height: 90%;
     justify-content: center;
     align-items: center;
 }
 
-.card {
-    width: 55%;
-    max-height: 90%;
-    border-radius: 10px;
+.loaders {
+    display: flex;
+    border-radius: 5px;
+    padding: 40px;
+    min-width: 60%;
     background-color: var(--body_chart);
-    border: 1px solid #2b367416;
-    padding: 10px;
+    justify-content: space-evenly;
 }
 
-.card-title {
-    padding: 10px;
-    font-size: 20px;
-}
+@media (max-width : 900px) {
+    .main {
+        height: auto;
+    }
 
-.description {
-    text-align: left;
-    padding: 20px;
+    .loaders {
+        flex-wrap: wrap;
+        margin-top: 45px;
+        padding: 0px;
+    }
 }

@@ -144,13 +144,8 @@ function RightBar({ Mode }) {
                             {
                                 imag.map((val, index) => {
                                     return (
-<<<<<<< HEAD
                                         <div className='img-container'>
-                                            <img src={val.url} alt=''/>
-=======
-                                        <div className='img-container' key={index}>
                                             <img src={val.url} alt='' />
->>>>>>> dash-v4
                                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <span>{val.name}</span>
                                                 <span>{val.percentage}%</span>
