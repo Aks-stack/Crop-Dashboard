@@ -32,9 +32,7 @@ export default function SideB(props) {
             <div className="routes">
                 <Link to="/">
                     <div className="icons">
-                        <a href='/' className='link'>
-                            <IconHome />
-                        </a>
+                        <IconHome />
                     </div>
                 </Link>
                 <Link to="/fertilizer">

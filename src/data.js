@@ -1,9 +1,6 @@
 const data1 = [
     ["Time", "Temperature", "Moisture"],
-    ["10", 26.2, 40],
-    ["20", 27.6, 46],
-    ["30", 79.2, 11],
-    ["40", 25.1, 54],
+    [10, 26.2, 140],
 ];
 
 const data2 = [
@@ -30,4 +27,5 @@ const data4 = [
     ["40", 7.3],
 ];
 
-export { data1, data2, data3, data4 };
+export { data1, data2, data3 };
+export { data4 };
