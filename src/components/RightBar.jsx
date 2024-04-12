@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Chart } from "react-google-charts";
+
 import { data1, data2, data3 } from '../data';
 import { data4 } from '../data';
 
@@ -7,20 +7,26 @@ import "./rightbar.css";
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
+import Chart_New from './Chart_New';
+import { Line } from 'react-chartjs-2';
 
 function RightBar({ Mode }) {
 
     const [updateData1, setUpdateData1] = useState(data1);
+    const [updateData2, setUpdateData2] = useState(data2);
+    const [updateData3, setUpdateData3] = useState(data3);
+    const [updateData4, setUpdateData4] = useState(data4);
+
     const [count, setCount] = useState(1);
 
     useEffect(() => {
         setTimeout(() => {
-            setUpdateData1([...updateData1, [count, 26.2, 140]])
+            setUpdateData1([...updateData1, { time: count, temp: 11, moisture: 120, }])
+            setUpdateData2([...updateData2, { time: count, N: 11, P: 120, K: 125 }])
+            setUpdateData3([...updateData3, { time: count, temp: 25, humidity: 45 }])
             setCount(count + 1);
         }, 1000)
     }, [count])
-
-    // console.log(count)
 
     const imag = [
         {
@@ -42,28 +48,6 @@ function RightBar({ Mode }) {
 
         }]
 
-
-    const options = {
-        width: "450px",
-        curveType: "",
-        legend: {
-            position: "bottom",
-            textStyle: { color: Mode ? 'grey' : 'black' }
-        },
-        chartArea: { left: "10%", width: "85%", height: "70%" },
-        backgroundColor: Mode ? "#111C44" : 'white',
-        hAxis: {
-            baselineColor: Mode ? 'grey' : 'black',
-            // gridlineColor: Mode?'white':'black',
-            textStyle: { color: Mode ? 'grey' : 'black' }
-        },
-        vAxis: {
-            baselineColor: Mode ? 'grey' : 'black',
-            // gridlineColor: Mode?'white':'black',
-            textStyle: { color: Mode ? 'grey' : 'black' }
-        }
-    };
-
     return (
         <div className='right-container'>
             <div className='right-container-title'>Main Dashboard</div>
@@ -78,13 +62,7 @@ function RightBar({ Mode }) {
                             <p>Soil Temperature & Moisture</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart
-                            className='chart'
-                            chartType="LineChart"
-                            style={{ width: "100%" }}
-                            data={updateData1}
-                            options={options}
-                        />
+                        <Chart_New x_name={"temp"} y_name={"moisture"} data={updateData1} />
                     </div>
 
                     {/* Chart - 2 */}
@@ -93,13 +71,7 @@ function RightBar({ Mode }) {
                             <p>N P K Data</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart
-                            className='chart'
-                            chartType="LineChart"
-                            style={{ width: "100%" }}
-                            data={data2}
-                            options={options}
-                        />
+                        <Chart_New x_name={"N"} y_name={"P"} z_name={"K"} data={updateData2} />
                     </div>
 
                     {/* Chart - 3 */}
@@ -108,13 +80,8 @@ function RightBar({ Mode }) {
                             <p>Temperature & Humidity</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart
-                            className='chart'
-                            chartType="LineChart"
-                            style={{ width: "100%" }}
-                            data={data3}
-                            options={options}
-                        />
+                        <Chart_New x_name={"temp"} y_name={"humidity"} data={updateData3} />
+
                     </div>
 
                     {/* Chart - 4 */}
@@ -123,13 +90,8 @@ function RightBar({ Mode }) {
                             <p>PH Value</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart
-                            className='chart'
-                            chartType="LineChart"
-                            style={{ width: "100%" }}
-                            data={data4}
-                            options={options}
-                        />
+                        <Chart_New x_name={"N"} y_name={"P"} data={data1} />
+
                     </div>
                 </div>
 
