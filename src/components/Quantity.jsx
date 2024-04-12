@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import ProgressBar from 'react-customizable-progressbar';
 
 function Quantity({ qnty, name, Mode }) {
     return (
         <div className="item" style={{ position: "relative", marginTop: "15px" }}>
             <ProgressBar
-                radius={80}
+                radius={45}
                 progress={qnty}
                 cut={120}
                 rotate={-210}

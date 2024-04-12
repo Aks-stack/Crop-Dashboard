@@ -27,11 +27,13 @@ a {
 .icons:hover {
     background: #372C44;
     color: #D8BCFF;
+    transform: scale(1.1);
     transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) !important;
 }
 
 .active {
     background: #372C44;
+    transform: scale(1.1);
     color: #D8BCFF !important;
     border-radius: 10px;
 }

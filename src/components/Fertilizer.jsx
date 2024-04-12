@@ -9,9 +9,14 @@ function Fertilizer({ Mode }) {
 
     return (
         <div className='main'>
-            <div className='title'>Main Dashboard</div>
+            <div className='title'>Fertilizer & Temprature prediction</div>
 
             <div className="main-content">
+                <div className="temp">
+                    <p>
+                        hello
+                    </p>
+                </div>
                 <div className="loaders">
                     <Quantity qnty={progress1} name={"N"} Mode={Mode} />
                     <Quantity qnty={progress2} name={"P"} Mode={Mode} />
