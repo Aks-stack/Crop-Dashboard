@@ -7,6 +7,10 @@
     flex-direction: column;
 }
 
+.new-chart {
+    border: 1px solid red;
+}
+
 .right-container-title {
     font-weight: 600;
     font-size: 20px;

@@ -1,22 +1,26 @@
 const data1 = [
-    ["Time", "Temperature", "Moisture"],
-    [10, 26.2, 140],
+    {
+        time: 1,
+        temp: 11,
+        moisture: 120,
+    },
 ];
 
 const data2 = [
-    ["Time", "N", "P", "K"],
-    ["10", 128, 78, 62],
-    ["20", 120, 45, 70],
-    ["30", 100, 11, 45],
-    ["40", 103, 54, 68],
+    {
+        time: 1,
+        N: 11,
+        P: 120,
+        K: 125
+    },
 ];
 
 const data3 = [
-    ["Time", "Temperature", "Humidity"],
-    ["10", 27, 40],
-    ["20", 28, 46],
-    ["30", 30, 11],
-    ["40", 26, 54],
+    {
+        time: 1,
+        temp: 25,
+        humidity: 18
+    },
 ];
 
 const data4 = [
