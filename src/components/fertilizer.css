@@ -15,30 +15,39 @@
     border-bottom: 1px solid var(--body_border);
 }
 
-.main-content {
-    display: flex;
+.bottom-fertilizer {
     min-height: 90%;
-    justify-content: space-around;
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.temp {
+.card-fertilizer {
+    padding: 50px;
     background-color: var(--body_chart);
-    width: 50%;
-    min-width: 400px;
-    display: flex;
-    min-height: 70vh;
+    border: 1px solid #2b36741d;
     border-radius: 10px;
+}
+
+.card-fertilizer-title {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+
+.progress-fertilizer-title {
+    display: flex;
+    gap: 20px;
     justify-content: center;
     align-items: center;
-    border: 1px solid #2b367416;
+    margin-bottom: 5px;
 }
 
 .loaders {
     display: flex;
     border-radius: 10px;
     flex-direction: column;
-    padding: 10px;
+    padding: 30px;
     min-width: 20%;
     background-color: var(--body_chart);
     justify-content: center;

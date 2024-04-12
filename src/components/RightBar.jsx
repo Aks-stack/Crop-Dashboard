@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 
 import { data1, data2, data3 } from '../data';
 import { data4 } from '../data';
+import { ReactComponent as Publish } from '../assets/upload-svgrepo-com.svg';
 
 import "./rightbar.css";
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
 import Chart_New from './Chart_New';
-import { Line } from 'react-chartjs-2';
 
 function RightBar({ Mode }) {
+
+    let socket = new WebSocket("ws://192.168.4.1/ws")
 
     const [updateData1, setUpdateData1] = useState(data1);
     const [updateData2, setUpdateData2] = useState(data2);
@@ -46,11 +48,32 @@ function RightBar({ Mode }) {
                 "https://img.freepik.com/free-photo/wheat-field-waving-wind-field-background_1268-30616.jpg?t=st=1712753654~exp=1712757254~hmac=9966fa288cd459031bbbcedd2a2d6c17e8c8453f6b3c4dee3aff9ce18583233b&w=1060",
             percentage: 8
 
+        },
+        {
+            name: "Wheat",
+            url:
+                "https://img.freepik.com/free-photo/corn-cob-green-leaves-fresh-sweet-corn-farmers-market-closeup-sweet-boiled-corn-market_1391-240.jpg?t=st=1712950884~exp=1712954484~hmac=d5f863070832ac3e64c6948f8d1101d2c56d2d95181f6765855e044f09cff1f8&w=996",
+            percentage: 8
+
+        }, {
+            name: "Wheat",
+            url:
+                "https://img.freepik.com/free-photo/red-fresh-apples-as-background_78492-3922.jpg?t=st=1712951016~exp=1712954616~hmac=26d3ddf56f37fb02cafef64e1f2f861f887609eefd8c30d8744713bc1d6d03a9&w=996",
+            percentage: 8
+
         }]
 
     return (
         <div className='right-container'>
-            <div className='right-container-title'>Main Dashboard</div>
+            <div className='right-container-title'>
+                <p>Main Dashboard</p>
+                <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Predict</span>
+                </button>
+            </div>
             <div className='bottom'>
 
                 {/* Taking 60% of the Right-part */}
@@ -81,7 +104,6 @@ function RightBar({ Mode }) {
                             <img src={buttonChart} alt="" />
                         </div>
                         <Chart_New x_name={"temp"} y_name={"humidity"} data={updateData3} />
-
                     </div>
 
                     {/* Chart - 4 */}
@@ -91,7 +113,6 @@ function RightBar({ Mode }) {
                             <img src={buttonChart} alt="" />
                         </div>
                         <Chart_New x_name={"N"} y_name={"P"} data={data1} />
-
                     </div>
                 </div>
 
@@ -119,12 +140,7 @@ function RightBar({ Mode }) {
                             }
                         </div>
                     </div>
-                    <div className='temperature container'>
-                        <div className='chart-container-top'>
-                            <p>Temperature Prediction</p>
-                            <img src={tempPredict} height={25} width={25} alt="" />
-                        </div>
-                    </div>
+
                 </div>
             </div>
 

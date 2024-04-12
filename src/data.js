@@ -31,5 +31,6 @@ const data4 = [
     ["40", 7.3],
 ];
 
+
 export { data1, data2, data3 };
 export { data4 };
