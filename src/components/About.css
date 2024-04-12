@@ -88,3 +88,9 @@
     text-align: left;
     padding: 20px;
 }
+
+.pic-content svg {
+    color: grey;
+    width: 20px;
+    height: 20px;
+}

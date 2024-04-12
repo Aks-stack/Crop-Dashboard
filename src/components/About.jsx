@@ -1,7 +1,7 @@
 import React from 'react'
 import './About.css'
 import Pic from '../assets/PXL_sq.jpg'
-import Linkedin from '../assets/linkedin.svg'
+import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
 
 export default function About() {
     return (
@@ -28,21 +28,28 @@ export default function About() {
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            {/* <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} /> */}
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
                         <div className="pic-content">
                             <img src="https://tovanidesign.com/wp-content/uploads/2019/02/C-_Users_Chrystina_Dropbox_tovani-design_size-examples-of-portraits_for-web_1-1-aspect-ratio-prints-at-square-for-social-media-for-web-photo-by-chrysti-tovani.jpg" alt='/' />
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
                         <div className="pic-content">
                             <img src="https://i0.wp.com/danishapiro.com/wp-content/uploads/2022/03/Author-Photo-color-aspect-ratio-1-1.jpeg?ssl=1" alt='/' />
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
 
                     </div>
@@ -54,7 +61,9 @@ export default function About() {
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
                     </div>
                     <div className="member2">
@@ -63,14 +72,18 @@ export default function About() {
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
                         <div className="pic-content">
                             <img src="https://eastsidepeople.org/wp-content/uploads/2023/02/Final-Renu-Gundala-Eastside-People-25663-001E-scaled-aspect-ratio-1-1.jpg" alt='/' />
                             <p>
                                 Name Name
                             </p>
-                            <img src={Linkedin} alt='/' style={{ width: "15px", height: "15px" }} />
+                            <svg>
+                                <Linkedin width="20px" height="20px" fill='currentColor'/>
+                            </svg>
                         </div>
                     </div>
                 </div>
