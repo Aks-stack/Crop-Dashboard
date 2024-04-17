@@ -2,7 +2,7 @@ const data1 = [
     {
         time: 1,
         temp: 11,
-        moisture: 120,
+        moisture: 10,
     },
 ];
 
@@ -18,17 +18,16 @@ const data2 = [
 const data3 = [
     {
         time: 1,
-        temp: 25,
+        temp: 5,
         humidity: 18
     },
 ];
 
 const data4 = [
-    ["Time", "pH"],
-    ["10", 5],
-    ["20", 8.6],
-    ["30", 6.2],
-    ["40", 7.3],
+    {
+        time: 1,
+        pH: 5,
+    },
 ];
 
 

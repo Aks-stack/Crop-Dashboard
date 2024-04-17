@@ -13,6 +13,7 @@
 
 .right-container-title {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-weight: 600;
     font-size: 20px;
@@ -21,6 +22,19 @@
 }
 
 .right-container-title button {}
+
+.crop-recommend {
+    position: relative;
+}
+
+
+.location-item {
+    display: flex;
+    gap: 2px;
+    margin-inline-start: auto;
+    margin-right: 50px;
+    align-items: center;
+}
 
 .chart {
     padding: 10px;
@@ -69,11 +83,22 @@
 }
 
 .recommendation-panel {
+    /* border: 1px solid red; */
+    position: relative;
     display: flex;
     justify-content: center;
     gap: 30px;
     width: 100%;
     height: 100%;
+}
+
+.error {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
 }
 
 .recommendation-panel img {

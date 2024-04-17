@@ -11,6 +11,7 @@ import {
 
 function Chart_New({ x_name, y_name, z_name, data, count }) {
     const pdata = data;
+    console.log(data);
     return (
         <>
             <ResponsiveContainer width="96%" height="70%" >
@@ -19,16 +20,16 @@ function Chart_New({ x_name, y_name, z_name, data, count }) {
                     <Legend layout="horizontal" verticalAlign="bottom" align="right" />
                     <CartesianGrid />
                     <XAxis fontSize={10} dataKey={count} interval={"preserveStartEnd"} />
-                    <YAxis fontSize={10}></YAxis>
+                    <YAxis tickFormatter={(value) => value.toFixed(3)} fontSize={10} type="number" ></YAxis>
                     <Tooltip />
                     <Line
-                        dataKey={`${y_name}`}
+                        dataKey={`${x_name}`}
                         stroke="black"
-                        activeDot={{ r: 7 }}
+                        dot={false}
                     />
-                    <Line dataKey={`${x_name}`} stroke="red" activeDot={{ r: 8 }} />
+                    {y_name && <Line dataKey={`${y_name}`} stroke="red" dot={false} type='monotone' />}
                     {z_name &&
-                        <Line dataKey={`${z_name}`} stroke="lightgreen" activeDot={{ r: 8 }} />}
+                        <Line dataKey={`${z_name}`} stroke="blue" dot={false} type='monotone' />}
                 </LineChart>
             </ResponsiveContainer>
         </>

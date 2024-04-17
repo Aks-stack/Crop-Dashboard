@@ -2,72 +2,107 @@ import React, { useEffect, useState } from 'react'
 
 import { data1, data2, data3 } from '../data';
 import { data4 } from '../data';
-import { ReactComponent as Publish } from '../assets/upload-svgrepo-com.svg';
 
 import "./rightbar.css";
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
 import tempPredict from "../assets/sun_2698213.png";
 import Chart_New from './Chart_New';
+import { GrLocation } from "react-icons/gr";
+import Lottie from 'lottie-react';
+import lottieDog from '../assets/Animation - 1713222371085.json';
+import Loader from './Loader';
+import axios from 'axios';
 
-function RightBar({ Mode }) {
+function RightBar({ Mode, city, latlong }) {
 
-    let socket = new WebSocket("ws://192.168.4.1/ws")
+    const [predict, setPredict] = useState(false);
+    const [spinner, setSpinner] = useState(false);
 
+    const [response, setResponse] = useState(null);
     const [updateData1, setUpdateData1] = useState(data1);
     const [updateData2, setUpdateData2] = useState(data2);
     const [updateData3, setUpdateData3] = useState(data3);
     const [updateData4, setUpdateData4] = useState(data4);
 
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
-        setTimeout(() => {
-            setUpdateData1([...updateData1, { time: count, temp: 11, moisture: 120, }])
-            setUpdateData2([...updateData2, { time: count, N: 11, P: 120, K: 125 }])
-            setUpdateData3([...updateData3, { time: count, temp: 25, humidity: 45 }])
-            setCount(count + 1);
-        }, 1000)
-    }, [count])
+
+        let socket = new WebSocket("ws://192.168.88.96/ws")
+        socket.onopen = () => {
+            console.log("connection open");
+        };
+        socket.onmessage = (event) => {
+            var data = event.data;
+            setResponse(JSON.parse(data));
+            setCount((prev) => prev + 1);
+        }
+    }, []);
+
+    // Updating of Data whenever Socket responces and increasing the value of count by 1
+    useEffect(() => {
+        console.log('Count updated:', count, response);
+        setUpdateData1([...updateData1, { time: count, temp: response?.Temp, moisture: response?.m }])
+        setUpdateData2([...updateData2, { time: count, N: response?.n, P: response?.p, K: response?.k }])
+        setUpdateData3([...updateData3, { time: count, temp: 27, humidity: 0 }])
+        setUpdateData4([...updateData3, { time: count, pH: response?.Temp }])
+    }, [count]);
 
     const imag = [
         {
             name: "Potato",
-            url: "https://img.freepik.com/free-photo/rustic-unpeeled-potatoes-desks_144627-3901.jpg?t=st=1712753748~exp=1712757348~hmac=178cdd27a843b6931dae696c8edc5135edaa671ae71d3a5ae3ee1f1abaaa0a07&w=996",
+            url: "/crops/potato.jpg",
             percentage: 78
         },
         {
             name: "Rice",
-            url: "https://img.freepik.com/free-photo/top-view-raw-rice-inside-plate-dark-desk_179666-27235.jpg?t=st=1712752730~exp=1712756330~hmac=468057fc9411797e73bc80ab3278aecae1623df06f37424a23a7dc8998079f5a&w=996",
+            url: "/crops/rice.avif",
             percentage: 14
         }
         ,
         {
             name: "Wheat",
-            url:
-                "https://img.freepik.com/free-photo/wheat-field-waving-wind-field-background_1268-30616.jpg?t=st=1712753654~exp=1712757254~hmac=9966fa288cd459031bbbcedd2a2d6c17e8c8453f6b3c4dee3aff9ce18583233b&w=1060",
+            url: "/crops/wheat.avif",
             percentage: 8
 
         },
         {
-            name: "Wheat",
+            name: "Maize",
             url:
-                "https://img.freepik.com/free-photo/corn-cob-green-leaves-fresh-sweet-corn-farmers-market-closeup-sweet-boiled-corn-market_1391-240.jpg?t=st=1712950884~exp=1712954484~hmac=d5f863070832ac3e64c6948f8d1101d2c56d2d95181f6765855e044f09cff1f8&w=996",
+                "/crops/corn.jpg",
             percentage: 8
 
         }, {
-            name: "Wheat",
+            name: "Apple",
             url:
-                "https://img.freepik.com/free-photo/red-fresh-apples-as-background_78492-3922.jpg?t=st=1712951016~exp=1712954616~hmac=26d3ddf56f37fb02cafef64e1f2f861f887609eefd8c30d8744713bc1d6d03a9&w=996",
+                "/crops/apple.avif",
             percentage: 8
 
         }]
+
+    const handlePredict = () => {
+        setPredict(!predict);
+        setSpinner(true);
+        const getData = async () => {
+            const data = await axios.get("https://jsonplaceholder.typicode.com/posts");
+            console.log(data);
+        }
+        setTimeout(() => {
+            getData();
+            setSpinner(false);
+        }, 2000);
+    }
 
     return (
         <div className='right-container'>
             <div className='right-container-title'>
                 <p>Main Dashboard</p>
-                <button class="learn-more">
+                <div className='location-item'>
+                    <GrLocation />
+                    {city}
+                </div>
+                <button class="learn-more" onClick={handlePredict}>
                     <span class="circle" aria-hidden="true">
                         <span class="icon arrow"></span>
                     </span>
@@ -112,7 +147,7 @@ function RightBar({ Mode }) {
                             <p>PH Value</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart_New x_name={"N"} y_name={"P"} data={data1} />
+                        <Chart_New x_name={"pH"} data={updateData4} />
                     </div>
                 </div>
 
@@ -124,23 +159,31 @@ function RightBar({ Mode }) {
                             <img src={plantPredict} height={25} width={25} alt="" />
                         </div>
                         <div className="recommendation-panel">
-                            {
-                                imag.map((val, index) => {
-                                    return (
-                                        <div className='img-container'>
-                                            <img src={val.url} alt='' />
-                                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                <span>{val.name}</span>
-                                                <span>{val.percentage}%</span>
-                                            </div>
-                                        </div >
-                                    )
+                            {predict ? (
+                                spinner ? <Loader /> :
+                                    imag.map((val, index) => {
+                                        return (
+                                            <div className='img-container'>
+                                                <img src={val.url} alt='' />
+                                                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                    <span>{val.name}</span>
+                                                    <span>{val.percentage}%</span>
+                                                </div>
+                                            </div >
+                                        )
 
-                                })
+                                    })
+                            )
+                                :
+                                <div className="error">
+                                    <Lottie animationData={lottieDog} style={{ height: "250px", width: "250px" }} loop={true} />
+                                    <p>
+                                        Please connect the device and click on predict button
+                                    </p>
+                                </div>
                             }
                         </div>
                     </div>
-
                 </div>
             </div>
 

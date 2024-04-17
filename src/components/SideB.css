@@ -28,7 +28,7 @@ a {
     background: #372C44;
     color: #D8BCFF;
     transform: scale(1.1);
-    transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045) !important;
+    transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 .active {
@@ -46,7 +46,6 @@ a {
     justify-content: center;
     gap: 5px;
 }
-
 
 .user {
     margin-top: 50px;

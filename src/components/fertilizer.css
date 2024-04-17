@@ -16,23 +16,70 @@
 }
 
 .bottom-fertilizer {
+    /* border: 1px solid red; */
     min-height: 90%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
+.info {
+    /* border: 1px solid black; */
+    margin-top: 35px;
+    width: 70%;
+    height: 80%;
+}
+
+.weather {
+    margin-top: -30px;
+    width: 100%;
+    /* height: 35%; */
+    display: flex;
+    overflow-x: auto;
+
+    gap: 38px;
+    background-color: var(--body_chart);
+    padding: 10px 30px;
+    margin-inline: auto;
+    scrollbar-width: thin;
+}
+
+.weather::-webkit-scrollbar {}
+
+.weather-card {
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    height: 150px;
+    width: 80px;
+    flex-shrink: 0;
+    /* border: 1px solid #2b367416; */
+
+}
+
+.text-nowrap {
+    text-wrap: nowrap;
+}
+
 .card-fertilizer {
     padding: 50px;
     background-color: var(--body_chart);
     border: 1px solid #2b36741d;
+    /* border: 1px solid pink; */
     border-radius: 10px;
+    flex-shrink: 0;
 }
 
 .card-fertilizer-title {
     display: flex;
     justify-content: space-between;
     margin-top: -10px;
+    font-weight: 600;
+
 }
 
 .progress-fertilizer-title {
@@ -41,6 +88,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .loaders {
@@ -60,6 +108,10 @@
         height: auto;
     }
 
+    .weather {
+        overflow-x: scroll;
+    }
+
     .main-content {
         flex-wrap: wrap;
         margin-top: 30px;
@@ -75,5 +127,14 @@
         margin-top: 45px;
         padding: 0px;
         width: 70%;
+    }
+
+    .bottom-fertilizer {
+        flex-direction: column;
+
+    }
+
+    .card-fertilizer {
+        height: 50px;
     }
 }
