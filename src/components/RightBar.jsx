@@ -28,6 +28,12 @@ function RightBar({ Mode, city, latlong }) {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
+        const esp = localStorage.getItem("esp")
+        const server = localStorage.getItem("server")
+        console.log("Right bar ", esp);
+    }, [])
+
+    useEffect(() => {
 
         let socket = new WebSocket("ws://192.168.0.192/ws")
         socket.onopen = () => {
@@ -37,6 +43,10 @@ function RightBar({ Mode, city, latlong }) {
             var data = event.data;
             setResponse(JSON.parse(data));
             setCount((prev) => prev + 1);
+        }
+
+        socket.onclose = () => {
+            console.log("Connection closed");
         }
     }, []);
 

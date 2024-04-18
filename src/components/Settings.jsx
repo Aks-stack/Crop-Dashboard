@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Settings.css'
 import { TbAntenna } from "react-icons/tb";
 
-export default function settings() {
+export default function Settings() {
+
+  const [esp, setEsp] = useState("");
+  const [serv, setServ] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(esp);
+    // console.log(serv);
+    localStorage.setItem("esp", esp);
+    localStorage.setItem("server", serv);
+  }
+
   return (
     <div className='Container-main'>
       <div className="title-child">
@@ -14,13 +26,13 @@ export default function settings() {
             Enter IP Address for the devices
             <div className="input-wraper">
               <TbAntenna />
-              <input type="text" placeholder='Enter Esp32 IP' className='ip-input' />
+              <input type="text" placeholder='Enter Esp32 IP' className='ip-input' value={esp} onChange={(e) => setEsp(e.target.value)} />
             </div>
             <div className="input-wraper">
               <TbAntenna />
-              <input type="text" placeholder='Enter Server IP' className='ip-input' />
+              <input type="text" placeholder='Enter Server IP' className='ip-input' value={serv} onChange={(e) => setServ(e.target.value)} />
             </div>
-            <div className="wrap">
+            <div className="wrap" onClick={handleSubmit}>
               <button className='submit-btn'>
                 Submit
               </button>

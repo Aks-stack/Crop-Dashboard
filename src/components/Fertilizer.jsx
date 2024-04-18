@@ -25,7 +25,7 @@ function Fertilizer({ Mode, latlong }) {
     useEffect(() => {
         const getData = async () => {
             try {
-                const data = await axios.post("http://192.168.0.105:5000/api/predict-weather", {
+                const data = await axios.post("http://127.0.0.1:8000/api/predict-weather", {
                     latitude: latlong.latitude,
                     longitude: latlong.longitude
                 }, {

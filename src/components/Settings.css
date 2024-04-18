@@ -45,10 +45,12 @@
 }
 
 .ip-form input {
-    padding: 10px;
+    padding: 5px;
+    height: 45px;
     border: hidden;
     border-radius: 10px;
     width: 85%;
+    font-size: 15px;
     /* box-shadow: 0px 0px 8px var(--input_shadow); */
     background-color: var(--body_background);
 }
@@ -65,8 +67,8 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 0px 0px 8px var(--input_shadow);
+    border-radius: 2px;
+    box-shadow: 0px 0px 4px var(--input_shadow);
     background-color: var(--body_background);
 }
 
@@ -78,15 +80,21 @@
 } */
 
 .submit-btn {
-    padding: 10px;
-    border-radius: 10px;
-    color: black;
-    border: 2px solid gray;
-    box-shadow: 0px 0px 8px var(--input_shadow);
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    border: 2px solid rgba(128, 128, 128, 0.688);
+    /* box-shadow: 0px 0px 8px var(--input_shadow); */
+    background-color: var(--body_color);
+    border: none;
 
 }
 
 .submit-btn:hover {
-    background-color: rgb(59, 67, 73);
-    color: white;
+    /* background-color: rgb(59, 67, 73); */
+    /* color: black; */
+    background-color: grey;
+
 }
