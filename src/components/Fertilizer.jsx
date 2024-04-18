@@ -92,7 +92,7 @@ function Fertilizer({ Mode, latlong }) {
                         <LineChart width={500} height={300} data={chartData}>
                             <XAxis dataKey="x" domain={[12, 22]} tick={{ fontSize: 12 }}
                                 type="number" label={{ value: "Days", position: "insideBottomRight", dy: 10 }} />
-                            <YAxis ticks={[-0.1, 8]} />
+                            <YAxis ticks={[-0.1, 8]} type="number" />
                             <Tooltip />
                             <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                             <Line type="monotone" label={<Label />} dataKey="y" stroke="#8884d8" />

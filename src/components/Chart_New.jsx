@@ -11,7 +11,8 @@ import {
 
 function Chart_New({ x_name, y_name, z_name, data, count }) {
     const pdata = data;
-    console.log(data);
+    // console.log(pdata);
+
     return (
         <>
             <ResponsiveContainer width="96%" height="70%" >
@@ -19,8 +20,8 @@ function Chart_New({ x_name, y_name, z_name, data, count }) {
                     data={pdata} >
                     <Legend layout="horizontal" verticalAlign="bottom" align="right" />
                     <CartesianGrid />
-                    <XAxis fontSize={10} dataKey={count} interval={"preserveStartEnd"} />
-                    <YAxis tickFormatter={(value) => value.toFixed(3)} fontSize={10} type="number" ></YAxis>
+                    <XAxis fontSize={10} dataKey={count} />
+                    <YAxis tickFormatter={(value) => value.toFixed(2)} fontSize={10} type="number" ></YAxis>
                     <Tooltip />
                     <Line
                         dataKey={`${x_name}`}

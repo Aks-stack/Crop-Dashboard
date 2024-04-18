@@ -26,8 +26,9 @@ const data3 = [
 const data4 = [
     {
         time: 1,
-        pH: 5,
+        moisture: 5,
     },
+
 ];
 
 

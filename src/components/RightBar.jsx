@@ -29,7 +29,7 @@ function RightBar({ Mode, city, latlong }) {
 
     useEffect(() => {
 
-        let socket = new WebSocket("ws://192.168.88.96/ws")
+        let socket = new WebSocket("ws://192.168.0.192/ws")
         socket.onopen = () => {
             console.log("connection open");
         };
@@ -42,11 +42,11 @@ function RightBar({ Mode, city, latlong }) {
 
     // Updating of Data whenever Socket responces and increasing the value of count by 1
     useEffect(() => {
-        console.log('Count updated:', count, response);
-        setUpdateData1([...updateData1, { time: count, temp: response?.Temp, moisture: response?.m }])
+        // console.log('Count updated:', count, response);
+        setUpdateData1([...updateData1, { time: count, temp: response?.Temp, }])
         setUpdateData2([...updateData2, { time: count, N: response?.n, P: response?.p, K: response?.k }])
         setUpdateData3([...updateData3, { time: count, temp: 27, humidity: 0 }])
-        setUpdateData4([...updateData3, { time: count, pH: response?.Temp }])
+        setUpdateData4([...updateData4, { time: count, moisture: response?.m }])
     }, [count]);
 
     const imag = [
@@ -117,10 +117,10 @@ function RightBar({ Mode, city, latlong }) {
                     {/* Chart - 1 */}
                     <div className='chart-container'>
                         <div className='chart-container-top'>
-                            <p>Soil Temperature & Moisture</p>
+                            <p>Soil Temperature</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart_New x_name={"temp"} y_name={"moisture"} data={updateData1} />
+                        <Chart_New x_name={"temp"} data={updateData1} />
                     </div>
 
                     {/* Chart - 2 */}
@@ -144,10 +144,10 @@ function RightBar({ Mode, city, latlong }) {
                     {/* Chart - 4 */}
                     <div className='chart-container'>
                         <div className='chart-container-top'>
-                            <p>PH Value</p>
+                            <p>Moisture</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart_New x_name={"pH"} data={updateData4} />
+                        <Chart_New x_name={"moisture"} data={updateData4} />
                     </div>
                 </div>
 
@@ -178,7 +178,7 @@ function RightBar({ Mode, city, latlong }) {
                                 <div className="error">
                                     <Lottie animationData={lottieDog} style={{ height: "250px", width: "250px" }} loop={true} />
                                     <p>
-                                        Please connect the device and click on predict button
+                                        Click on predict button
                                     </p>
                                 </div>
                             }
