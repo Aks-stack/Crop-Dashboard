@@ -106,7 +106,9 @@
     height: 130px;
     border-radius: 100%;
     object-fit: cover;
-    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .img-container {

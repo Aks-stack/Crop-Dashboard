@@ -13,12 +13,23 @@ import Lottie from 'lottie-react';
 import lottieDog from '../assets/Animation - 1713222371085.json';
 import Loader from './Loader';
 import axios from 'axios';
+import Snackbar from "@material-ui/core/Snackbar";
 
 function RightBar({ Mode, city, latlong }) {
 
     const [request, setRequest] = useState([]);
     const [predictarr, setPredictarr] = useState();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleToClose = (event, reason) => {
+        if ("clickaway" == reason) return;
+        setOpen(false);
+    };
+
+    const handleClickEvent = () => {
+        setOpen(true);
+    };
 
     const [predict, setPredict] = useState(false);
     const [spinner, setSpinner] = useState(false);
@@ -44,6 +55,7 @@ function RightBar({ Mode, city, latlong }) {
         socket.onopen = () => {
             console.log("connection open");
 
+            setOpen(true);
         };
         socket.onmessage = (event) => {
             var data = event.data;
@@ -120,6 +132,7 @@ function RightBar({ Mode, city, latlong }) {
             getData();
             setSpinner(false);
         }, 1000);
+        setOpen(true);
     }
 
     return (
@@ -136,6 +149,16 @@ function RightBar({ Mode, city, latlong }) {
                     </span>
                     <span class="button-text">Predict</span>
                 </button>
+                <Snackbar
+                    anchorOrigin={{
+                        horizontal: "center",
+                        vertical: "top",
+                    }}
+                    open={open}
+                    autoHideDuration={5000}
+                    message="Conection open"
+                    onClose={handleToClose}
+                />
             </div>
             <div className='bottom'>
 
