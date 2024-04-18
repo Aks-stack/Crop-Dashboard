@@ -3,6 +3,7 @@
     --body_color: #2B3674;
     --body_chart: white;
     --body_border: #2b36741d;
+    --input_shadow: #ddd;
 }
 
 [data-theme="dark"] {
@@ -10,6 +11,7 @@
     --body_color: #FFFFFF;
     --body_chart: #111c44c7;
     --body_border: rgba(95, 95, 95, 0.664);
+    --input_shadow: rgb(71, 71, 71);
 }
 
 * {

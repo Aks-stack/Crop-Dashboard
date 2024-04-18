@@ -8,6 +8,7 @@ import {
 } from "react-router-dom"
 import About from './components/About';
 import Fertilizer from './components/Fertilizer';
+import Settings from './components/Settings';
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
     });
   }, [])
   const [Mode, setMode] = useState(false)
-  console.log(latlong)
+  // console.log(latlong)
 
   return (
     <div className="App">
@@ -51,6 +52,7 @@ function App() {
           <Route index element={<RightBar Mode={Mode} setMode={setMode} city={city} />}></Route>
           <Route path='about' element={<About />}></Route>
           <Route path='fertilizer' element={<Fertilizer Mode={Mode} latlong={latlong} />}></Route>
+          <Route path='settings' element={<Settings/>}></Route>
         </Routes>
       </Router>
     </div>
