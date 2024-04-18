@@ -44,7 +44,7 @@
     scrollbar-width: thin;
 }
 
-.weather::-webkit-scrollbar {}
+/* .weather::-webkit-scrollbar {} */
 
 .weather-card {
     font-size: 12px;
@@ -61,9 +61,9 @@
 
 }
 
-.text-nowrap {
+/* .text-nowrap {
     text-wrap: nowrap;
-}
+} */
 
 .card-fertilizer {
     padding: 50px;
