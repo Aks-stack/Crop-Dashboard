@@ -16,6 +16,10 @@ import axios from 'axios';
 
 function RightBar({ Mode, city, latlong }) {
 
+    const [request, setRequest] = useState([]);
+    const [predictarr, setPredictarr] = useState();
+
+
     const [predict, setPredict] = useState(false);
     const [spinner, setSpinner] = useState(false);
 
@@ -31,6 +35,7 @@ function RightBar({ Mode, city, latlong }) {
         const esp = localStorage.getItem("esp")
         const server = localStorage.getItem("server")
         console.log("Right bar ", esp);
+
     }, [])
 
     useEffect(() => {
@@ -38,15 +43,12 @@ function RightBar({ Mode, city, latlong }) {
         let socket = new WebSocket("ws://192.168.0.192/ws")
         socket.onopen = () => {
             console.log("connection open");
+
         };
         socket.onmessage = (event) => {
             var data = event.data;
             setResponse(JSON.parse(data));
             setCount((prev) => prev + 1);
-        }
-
-        socket.onclose = () => {
-            console.log("Connection closed");
         }
     }, []);
 
@@ -95,13 +97,29 @@ function RightBar({ Mode, city, latlong }) {
         setPredict(!predict);
         setSpinner(true);
         const getData = async () => {
-            const data = await axios.get("https://jsonplaceholder.typicode.com/posts");
-            console.log(data);
+
+            const { temp } = updateData1[updateData1.length - 1];
+            const { N, P, K } = updateData2[updateData2.length - 1];
+            const { moisture } = updateData4[updateData4.length - 1]
+
+            request.splice(0, request.length)
+            request.push(N)
+            request.push(P)
+            request.push(K)
+            request.push(temp)
+            request.push(moisture)
+
+            const { data } = await axios.post("http://127.0.0.1:8000/api/predict-crop", { data: [123, 44, 61, 25.5, 98] });
+            const data2 = data.data?.map((item) => {
+                return { ...item, probability: +item.probability.toFixed(2) }
+            })
+            setPredictarr(data2);
+            console.log(predictarr);
         }
         setTimeout(() => {
             getData();
             setSpinner(false);
-        }, 2000);
+        }, 1000);
     }
 
     return (
@@ -171,13 +189,16 @@ function RightBar({ Mode, city, latlong }) {
                         <div className="recommendation-panel">
                             {predict ? (
                                 spinner ? <Loader /> :
-                                    imag.map((val, index) => {
+                                    predictarr?.map((val, index) => {
                                         return (
                                             <div className='img-container'>
-                                                <img src={val.url} alt='' />
-                                                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                    <span>{val.name}</span>
-                                                    <span>{val.percentage}%</span>
+                                                {
+                                                    console.log(val)
+                                                }
+                                                <img src={`/crops/${val?.crop_name}.jpg`} alt={val?.crop_name} />
+                                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "500", flexDirection: "column" }}>
+                                                    <span style={{ textTransform: "capitalize" }}>{val?.crop_name}</span>
+                                                    <span>{val?.probability}%</span>
                                                 </div>
                                             </div >
                                         )
