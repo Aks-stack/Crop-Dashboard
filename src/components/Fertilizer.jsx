@@ -13,19 +13,23 @@ import Cloud from "../assets/cloud.png";
 import { Line, BarChart, Tooltip, Legend, LineChart, CartesianGrid, XAxis, ResponsiveContainer, YAxis, Bar } from "recharts";
 import axios from 'axios';
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
 
 function Fertilizer({ Mode, latlong }) {
-
+    const [serverip, setServerip] = useState(localStorage.getItem("server"));
     const [weather, setWeather] = useState([]);
     const [chartData, setChartdata] = useState([]);
 
+    const { state } = useLocation();
+
+    console.log("State ", state)
     useEffect(() => {
         const getData = async () => {
             try {
-                const data = await axios.post("http://127.0.0.1:8000/api/predict-weather", {
+                const data = await axios.post(`http://${serverip}/api/predict-weather`, {
                     latitude: latlong.latitude,
                     longitude: latlong.longitude
                 }, {
@@ -124,7 +128,7 @@ function Fertilizer({ Mode, latlong }) {
                 </div>
                 <div className="loaders">
                     <div className='progress-fertilizer-title'>
-                        <p>Fertilizer Requirement <br /> Analysis</p>
+                        <p>Fertilizer Requirement <br /> Analysis for <u>{state?.name}</u></p>
                         <img src={FertilizerIcon} alt="" height={30} width={30} />
                     </div>
                     <Quantity qnty={progress1} name={"N"} Mode={Mode} />

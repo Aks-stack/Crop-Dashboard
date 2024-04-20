@@ -52,7 +52,7 @@ function App() {
           <Route index element={<RightBar Mode={Mode} setMode={setMode} city={city} />}></Route>
           <Route path='about' element={<About />}></Route>
           <Route path='fertilizer' element={<Fertilizer Mode={Mode} latlong={latlong} />}></Route>
-          <Route path='settings' element={<Settings/>}></Route>
+          <Route path='settings' element={<Settings />}></Route>
         </Routes>
       </Router>
     </div>

@@ -9,7 +9,7 @@ import {
     CartesianGrid,
 } from "recharts";
 
-function Chart_New({ x_name, y_name, z_name, data, count }) {
+function Chart_New({ x_name, y_name, z_name, data, count, yaxisRange }) {
     const pdata = data;
     // console.log(pdata);
 
@@ -21,7 +21,7 @@ function Chart_New({ x_name, y_name, z_name, data, count }) {
                     <Legend layout="horizontal" verticalAlign="bottom" align="right" />
                     <CartesianGrid />
                     <XAxis fontSize={10} dataKey={count} />
-                    <YAxis tickFormatter={(value) => value.toFixed(2)} fontSize={10} type="number" ></YAxis>
+                    <YAxis tickFormatter={(value) => value.toFixed(2)} domain={yaxisRange} fontSize={10} type="number" ></YAxis>
                     <Tooltip />
                     <Line
                         dataKey={`${x_name}`}

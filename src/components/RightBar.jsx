@@ -14,21 +14,21 @@ import lottieDog from '../assets/Animation - 1713222371085.json';
 import Loader from './Loader';
 import axios from 'axios';
 import Snackbar from "@material-ui/core/Snackbar";
+import { useNavigate } from 'react-router-dom';
 
 function RightBar({ Mode, city, latlong }) {
 
     const [request, setRequest] = useState([]);
     const [predictarr, setPredictarr] = useState();
-
     const [open, setOpen] = React.useState(false);
+
+    const [espip, setEspip] = useState(localStorage.getItem("esp"));
+    const [serverip, setServerip] = useState(localStorage.getItem("server"));
+
 
     const handleToClose = (event, reason) => {
         if ("clickaway" == reason) return;
         setOpen(false);
-    };
-
-    const handleClickEvent = () => {
-        setOpen(true);
     };
 
     const [predict, setPredict] = useState(false);
@@ -42,25 +42,28 @@ function RightBar({ Mode, city, latlong }) {
 
     const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        const esp = localStorage.getItem("esp")
-        const server = localStorage.getItem("server")
-        console.log("Right bar ", esp);
+    const navigate = useNavigate();
 
-    }, [])
 
     useEffect(() => {
 
-        let socket = new WebSocket("ws://192.168.0.192/ws")
+        let socket = new WebSocket(`ws://${espip}/ws`)
+        console.log(`ws://${espip}/ws`);
         socket.onopen = () => {
             console.log("connection open");
-
             setOpen(true);
         };
         socket.onmessage = (event) => {
             var data = event.data;
             setResponse(JSON.parse(data));
             setCount((prev) => prev + 1);
+        }
+        socket.onclose = () => {
+            console.log("Connection closed")
+        }
+
+        socket.onerror = () => {
+            console.log("Error");
         }
     }, []);
 
@@ -113,26 +116,43 @@ function RightBar({ Mode, city, latlong }) {
             const { temp } = updateData1[updateData1.length - 1];
             const { N, P, K } = updateData2[updateData2.length - 1];
             const { moisture } = updateData4[updateData4.length - 1]
+            setPredictarr([]);
+            if (N > 1 && P > 1 && K > 1) {
+                console.log("dasdasd");
+                request.splice(0, request.length)
+                request.push(N)
+                request.push(P)
+                request.push(K)
+                request.push(temp)
+                request.push(moisture)
 
-            request.splice(0, request.length)
-            request.push(N)
-            request.push(P)
-            request.push(K)
-            request.push(temp)
-            request.push(moisture)
+                console.log(request);
 
-            const { data } = await axios.post("http://127.0.0.1:8000/api/predict-crop", { data: [123, 44, 61, 25.5, 98] });
-            const data2 = data.data?.map((item) => {
-                return { ...item, probability: +item.probability.toFixed(2) }
-            })
-            setPredictarr(data2);
-            console.log(predictarr);
+                const { data } = await axios.post(`http://${serverip}/api/predict-crop`, { data: request });
+                const data2 = data.data?.map((item) => {
+                    return { ...item, probability: +item.probability.toFixed(2) }
+                })
+                setPredictarr(data2);
+                console.log(predictarr);
+            }
+            setSpinner(false);
         }
         setTimeout(() => {
             getData();
-            setSpinner(false);
+            console.log(predictarr);
+
         }, 1000);
-        setOpen(true);
+    }
+
+    const handleFertilizer = (crop, n, p, k) => {
+        navigate(`/fertilizer`, {
+            state: {
+                name: crop,
+                n,
+                p,
+                k
+            }
+        })
     }
 
     return (
@@ -156,7 +176,7 @@ function RightBar({ Mode, city, latlong }) {
                     }}
                     open={open}
                     autoHideDuration={5000}
-                    message="Conection open"
+                    message="Device connected"
                     onClose={handleToClose}
                 />
             </div>
@@ -171,7 +191,7 @@ function RightBar({ Mode, city, latlong }) {
                             <p>Soil Temperature</p>
                             <img src={buttonChart} alt="" />
                         </div>
-                        <Chart_New x_name={"temp"} data={updateData1} />
+                        <Chart_New x_name={"temp"} data={updateData1} yaxisRange={[22, 55]} />
                     </div>
 
                     {/* Chart - 2 */}
@@ -212,25 +232,24 @@ function RightBar({ Mode, city, latlong }) {
                         <div className="recommendation-panel">
                             {predict ? (
                                 spinner ? <Loader /> :
-                                    predictarr?.map((val, index) => {
-                                        return (
-                                            <div className='img-container'>
-                                                {
-                                                    console.log(val)
-                                                }
-                                                <img src={`/crops/${val?.crop_name}.jpg`} alt={val?.crop_name} />
-                                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "500", flexDirection: "column" }}>
-                                                    <span style={{ textTransform: "capitalize" }}>{val?.crop_name}</span>
-                                                    <span>{val?.probability}%</span>
-                                                </div>
-                                            </div >
-                                        )
+                                    predictarr?.length === 0 ?
+                                        <h3>Device Error</h3>
+                                        : predictarr?.map((val, index) => {
+                                            return (
+                                                <div className='img-container'>
+                                                    <img onClick={() => handleFertilizer(val?.crop_name, val?.n, val?.p, val?.k)} src={`/crops/${val?.crop_name}.jpg`} alt={val?.crop_name} />
+                                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "500", flexDirection: "column" }}>
+                                                        <span style={{ textTransform: "capitalize" }}>{val?.crop_name}</span>
+                                                        <span>{val?.probability}%</span>
+                                                    </div>
+                                                </div >
+                                            )
 
-                                    })
+                                        })
                             )
                                 :
                                 <div className="error">
-                                    <Lottie animationData={lottieDog} style={{ height: "250px", width: "250px" }} loop={true} />
+                                    <Lottie animationData={lottieDog} style={{ height: "250px", width: "250px" }} loop={true} speed="1 !important" />
                                     <p>
                                         Click on predict button
                                     </p>
