@@ -19,6 +19,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import Loader2 from './Loader2';
+import { Chart } from "react-google-charts";
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
@@ -33,6 +34,27 @@ function Fertilizer({ Mode, latlong }) {
     const [spinner, setSpinner] = useState(false);
 
     // console.log("State ", state)
+
+    const options = {
+        width: "450px",
+        curveType: "",
+        legend: {
+            position: "bottom",
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        },
+        chartArea: { left: "10%", width: "85%", height: "70%" },
+        backgroundColor: Mode ? "#111C44" : 'white',
+        hAxis: {
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        },
+        vAxis: {
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        }
+    };
 
     useEffect(() => {
         const getData = async () => {
@@ -55,6 +77,43 @@ function Fertilizer({ Mode, latlong }) {
         };
         getData();
 
+<<<<<<< HEAD
+=======
+        // const getRain = async () => {
+        //     const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
+        //     const data = resp.data.daily
+
+        //     // const dataset = [["Age", "Weight"],]
+        //     // for (let i = 0; i < data.rain_sum.length; i++) {
+        //     //     // const currrObj = {
+        //     //     //     // name: data.time[i],
+        //     //     //     y: data.rain_sum[i],
+        //     //     //     x: (new Date(data.time[i])).getDate()
+        //     //     // }
+
+        //     //     dataset.push([(new Date(data.time[i])).getDate(), data.rain_sum[i]])
+        //     // }
+            
+        //     setChartdata()
+        //     console.log('rainfall',chartData);
+
+        //     // setTimeout(() => console.log(dataset), 200)
+        // }
+        // getRain();
+        const getRain = async () => {
+            const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
+            const data = resp.data.daily
+            const { rain_sum } = data;
+
+            const rainfall = rain_sum.map((item, index) => {
+                return [(new Date(data.time[index])).getDate(), item]
+            })
+            setDataset([...dataset, ...rainfall])
+            console.log("Charts", dataset);
+        }
+        getRain();
+
+>>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
     }, []);
 
     const [progress1, setProgress1] = useState(state?.n);
@@ -63,14 +122,18 @@ function Fertilizer({ Mode, latlong }) {
 
     const newArr = chartData.map((value) => value.y)
     // console.log(newArr);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
 
     return (
         <div className='main'>
             <div className='title'>Fertilizer & Temperature prediction</div>
             <div className='bottom-fertilizer'>
                 <div className="info">
+<<<<<<< HEAD
                     <ResponsiveContainer className="card-fertilizer" width="100%" height="60%" >
                         <LineChart width={500} height={300} data={chartData}>
                             <XAxis dataKey="x" domain={[12, 22]} tick={{ fontSize: 12 }}
@@ -81,6 +144,17 @@ function Fertilizer({ Mode, latlong }) {
                             <Line type="monotone" label={<Label />} dataKey="y" stroke="#8884d8" />
                         </LineChart>
                     </ResponsiveContainer>
+=======
+                    <div className="card-fertilizer">
+                    <Chart
+                        className='chart'
+                        chartType="Bar"
+                        style={{ width: "100%" }}
+                        data={dataset}
+                        options={options}
+                        />
+                        </div>
+>>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
                     <div className="weather">
                         {
                             spinner ? <Loader2 /> : (
