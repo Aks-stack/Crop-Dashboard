@@ -93,7 +93,13 @@
     font-weight: 600;
 }
 
+.progress-fertilizer-title img {
+    border-radius: 50%;
+}
+
 .loaders {
+    position: relative;
+    /* color: white; */
     display: flex;
     border-radius: 10px;
     flex-direction: column;
@@ -102,7 +108,17 @@
     background-color: var(--body_chart);
     justify-content: center;
     align-items: center;
+    z-index: 1;
     border: 1px solid #2b367416;
+}
+
+.background-loaders {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    /* z-index: -1; */
+    opacity: 30%;
 }
 
 @media (max-width : 900px) {

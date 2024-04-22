@@ -32,7 +32,7 @@ function RightBar({ Mode, city, latlong }) {
         setOpen(false);
     };
 
-    const [predict, setPredict] = useState(false);
+    const [predict, setPredict] = useState(predictarr?.length == 0 ? false : true);
     const [spinner, setSpinner] = useState(false);
     const [response, setResponse] = useState(null);
     const [updateData1, setUpdateData1] = useState(data1);
@@ -44,7 +44,7 @@ function RightBar({ Mode, city, latlong }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-
+        setPredictarr(JSON.parse(localStorage.getItem("predict")))
         let socket = new WebSocket(`ws://${espip}/ws`)
         console.log(`ws://${espip}/ws`);
 
@@ -75,7 +75,7 @@ function RightBar({ Mode, city, latlong }) {
     }, [count]);
 
     const handlePredict = () => {
-        setPredict(!predict);
+        // setPredict(predictarr.length != 0 ? true : false);
         setSpinner(true);
         const getData = async () => {
 
@@ -99,13 +99,14 @@ function RightBar({ Mode, city, latlong }) {
                     return { ...item, probability: +item.probability.toFixed(2) }
                 })
                 setPredictarr(data2);
-                console.log(predictarr);
+                // console.log("Final Predict", predictarr);
+                let string = JSON.stringify(predictarr);
+                localStorage.setItem("predict", string);
             }
             setSpinner(false);
         }
         setTimeout(() => {
             getData();
-            console.log(predictarr);
         }, 1000);
     }
 
@@ -119,6 +120,8 @@ function RightBar({ Mode, city, latlong }) {
             }
         })
     }
+
+    console.log(predictarr);
 
     return (
         <div className='right-container'>
