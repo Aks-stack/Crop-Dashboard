@@ -4,13 +4,11 @@ import { TbAntenna } from "react-icons/tb";
 
 export default function Settings() {
 
-  const [esp, setEsp] = useState("");
-  const [serv, setServ] = useState("");
+  const [esp, setEsp] = useState(localStorage.getItem("esp") || "");
+  const [serv, setServ] = useState(localStorage.getItem("server") || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(esp);
-    // console.log(serv);
     localStorage.setItem("esp", esp);
     localStorage.setItem("server", serv);
   }

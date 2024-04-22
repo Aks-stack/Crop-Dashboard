@@ -7,13 +7,14 @@ import { IoRainyOutline } from "react-icons/io5";
 import Sunny from "../assets/sun.png";
 import Rain from "../assets/rain.png";
 import Cloud from "../assets/cloud.png";
-
+import Loader from './Loader';
 
 
 import { Line, BarChart, Tooltip, Legend, LineChart, CartesianGrid, XAxis, ResponsiveContainer, YAxis, Bar } from "recharts";
 import axios from 'axios';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
+import Loader2 from './Loader2';
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
@@ -24,24 +25,29 @@ function Fertilizer({ Mode, latlong }) {
     const [chartData, setChartdata] = useState([]);
 
     const { state } = useLocation();
+    const [spinner, setSpinner] = useState(false);
 
     console.log("State ", state)
+
     useEffect(() => {
         const getData = async () => {
             try {
+                setSpinner(true);
                 const data = await axios.post(`http://${serverip}/api/predict-weather`, {
-                    latitude: latlong.latitude,
-                    longitude: latlong.longitude
+                    latitude: latlong?.latitude,
+                    longitude: latlong?.longitude
                 }, {
                     headers: { "Content-Type": "application/json" } // Content-Type might be required by your backend
                 });
                 console.log(data);
                 setWeather(data.data.data);
+                setSpinner(false);
+
             } catch (error) {
                 console.error(error);
             }
-        };
 
+        };
         getData();
 
         const getRain = async () => {
@@ -67,9 +73,9 @@ function Fertilizer({ Mode, latlong }) {
 
     }, []);
 
-    const [progress1, setProgress1] = useState(7);
-    const [progress2, setProgress2] = useState(45);
-    const [progress3, setProgress3] = useState(78);
+    const [progress1, setProgress1] = useState(17);
+    const [progress2, setProgress2] = useState(28);
+    const [progress3, setProgress3] = useState(23);
 
     const newArr = chartData.map((value) => value.y)
     console.log(newArr);
@@ -106,7 +112,7 @@ function Fertilizer({ Mode, latlong }) {
                     </ResponsiveContainer>
                     <div className="weather">
                         {
-                            weather && weather.filter((item) => {
+                            spinner ? <Loader2 /> : (weather && weather.filter((item) => {
 
                                 const date = new Date(item.time);
                                 return true
@@ -122,7 +128,7 @@ function Fertilizer({ Mode, latlong }) {
                                             <p className='text-nowrap'>Min - {val.tmin.toFixed(2)}&deg;C</p>
                                         </div>
                                     )
-                                })
+                                }))
                         }
                     </div>
                 </div>

@@ -1,30 +1,31 @@
+// Packages
+import "./rightbar.css";
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import Snackbar from "@material-ui/core/Snackbar";
+import { useNavigate } from 'react-router-dom';
 
+// Data
 import { data1, data2, data3 } from '../data';
 import { data4 } from '../data';
 
-import "./rightbar.css";
+// Import Files and Components
 import buttonChart from "../assets/Button.svg";
 import plantPredict from "../assets/plant_7963920.png";
-import tempPredict from "../assets/sun_2698213.png";
 import Chart_New from './Chart_New';
 import { GrLocation } from "react-icons/gr";
 import Lottie from 'lottie-react';
 import lottieDog from '../assets/Animation - 1713222371085.json';
 import Loader from './Loader';
-import axios from 'axios';
-import Snackbar from "@material-ui/core/Snackbar";
-import { useNavigate } from 'react-router-dom';
 
 function RightBar({ Mode, city, latlong }) {
-
-    const [request, setRequest] = useState([]);
-    const [predictarr, setPredictarr] = useState();
-    const [open, setOpen] = React.useState(false);
 
     const [espip, setEspip] = useState(localStorage.getItem("esp"));
     const [serverip, setServerip] = useState(localStorage.getItem("server"));
 
+    const [request, setRequest] = useState([]);
+    const [predictarr, setPredictarr] = useState();
+    const [open, setOpen] = React.useState(false);
 
     const handleToClose = (event, reason) => {
         if ("clickaway" == reason) return;
@@ -33,22 +34,20 @@ function RightBar({ Mode, city, latlong }) {
 
     const [predict, setPredict] = useState(false);
     const [spinner, setSpinner] = useState(false);
-
     const [response, setResponse] = useState(null);
     const [updateData1, setUpdateData1] = useState(data1);
     const [updateData2, setUpdateData2] = useState(data2);
     const [updateData3, setUpdateData3] = useState(data3);
     const [updateData4, setUpdateData4] = useState(data4);
-
     const [count, setCount] = useState(0);
 
     const navigate = useNavigate();
-
 
     useEffect(() => {
 
         let socket = new WebSocket(`ws://${espip}/ws`)
         console.log(`ws://${espip}/ws`);
+
         socket.onopen = () => {
             console.log("connection open");
             setOpen(true);
@@ -61,7 +60,6 @@ function RightBar({ Mode, city, latlong }) {
         socket.onclose = () => {
             console.log("Connection closed")
         }
-
         socket.onerror = () => {
             console.log("Error");
         }
@@ -75,38 +73,6 @@ function RightBar({ Mode, city, latlong }) {
         setUpdateData3([...updateData3, { time: count, temp: 27, humidity: 0 }])
         setUpdateData4([...updateData4, { time: count, moisture: response?.m }])
     }, [count]);
-
-    const imag = [
-        {
-            name: "Potato",
-            url: "/crops/potato.jpg",
-            percentage: 78
-        },
-        {
-            name: "Rice",
-            url: "/crops/rice.avif",
-            percentage: 14
-        }
-        ,
-        {
-            name: "Wheat",
-            url: "/crops/wheat.avif",
-            percentage: 8
-
-        },
-        {
-            name: "Maize",
-            url:
-                "/crops/corn.jpg",
-            percentage: 8
-
-        }, {
-            name: "Apple",
-            url:
-                "/crops/apple.avif",
-            percentage: 8
-
-        }]
 
     const handlePredict = () => {
         setPredict(!predict);
@@ -140,7 +106,6 @@ function RightBar({ Mode, city, latlong }) {
         setTimeout(() => {
             getData();
             console.log(predictarr);
-
         }, 1000);
     }
 
