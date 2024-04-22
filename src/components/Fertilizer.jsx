@@ -15,6 +15,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import Loader2 from './Loader2';
+import { Chart } from "react-google-charts";
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
@@ -23,11 +24,33 @@ function Fertilizer({ Mode, latlong }) {
     const [serverip, setServerip] = useState(localStorage.getItem("server"));
     const [weather, setWeather] = useState([]);
     const [chartData, setChartdata] = useState([]);
+    const [dataset, setDataset] = useState([["Day", "Rainfall"]]);
 
     const { state } = useLocation();
     const [spinner, setSpinner] = useState(false);
 
     console.log("State ", state)
+
+    const options = {
+        width: "450px",
+        curveType: "",
+        legend: {
+            position: "bottom",
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        },
+        chartArea: { left: "10%", width: "85%", height: "70%" },
+        backgroundColor: Mode ? "#111C44" : 'white',
+        hAxis: {
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        },
+        vAxis: {
+            baselineColor: Mode ? 'grey' : 'black',
+            // gridlineColor: Mode?'white':'black',
+            textStyle: { color: Mode ? 'grey' : 'black' }
+        }
+    };
 
     useEffect(() => {
         const getData = async () => {
@@ -50,24 +73,37 @@ function Fertilizer({ Mode, latlong }) {
         };
         getData();
 
+        // const getRain = async () => {
+        //     const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
+        //     const data = resp.data.daily
+
+        //     // const dataset = [["Age", "Weight"],]
+        //     // for (let i = 0; i < data.rain_sum.length; i++) {
+        //     //     // const currrObj = {
+        //     //     //     // name: data.time[i],
+        //     //     //     y: data.rain_sum[i],
+        //     //     //     x: (new Date(data.time[i])).getDate()
+        //     //     // }
+
+        //     //     dataset.push([(new Date(data.time[i])).getDate(), data.rain_sum[i]])
+        //     // }
+            
+        //     setChartdata()
+        //     console.log('rainfall',chartData);
+
+        //     // setTimeout(() => console.log(dataset), 200)
+        // }
+        // getRain();
         const getRain = async () => {
             const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
             const data = resp.data.daily
+            const { rain_sum } = data;
 
-            const dataset = []
-            for (let i = 0; i < data.rain_sum.length; i++) {
-                const currrObj = {
-                    name: data.time[i],
-                    y: data.rain_sum[i],
-                    x: (new Date(data.time[i])).getDate()
-                }
-
-                dataset.push(currrObj)
-            }
-
-            setChartdata(dataset)
-            // setTimeout(() => console.log(dataset), 200)
-
+            const rainfall = rain_sum.map((item, index) => {
+                return [(new Date(data.time[index])).getDate(), item]
+            })
+            setDataset([...dataset, ...rainfall])
+            console.log("Charts", dataset);
         }
         getRain();
 
@@ -78,38 +114,22 @@ function Fertilizer({ Mode, latlong }) {
     const [progress3, setProgress3] = useState(23);
 
     const newArr = chartData.map((value) => value.y)
-    console.log(newArr);
+    // console.log(newArr);
 
     return (
         <div className='main'>
             <div className='title'>Fertilizer & Temperature prediction</div>
             <div className='bottom-fertilizer'>
                 <div className="info">
-                    <ResponsiveContainer className="card-fertilizer" width="100%" height="60%" >
-                        {/* <BarChart width={100} height={200} data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis
-                                tick={{ fontSize: 12 }}
-                                dataKey="x"
-                                type="number"
-                                ticks={[-1, 5]}
-                                domain={[12, 22]}
-                            />
-                            <YAxis />
-                            <Bar dataKey="y" barSize={32} label={<Label />} fill="#8884d8" />
-                            {/* <Line type="monotone" dataKey="uv" stroke="#8884d8" /> 
-                        </BarChart> */}
-                        <LineChart width={500} height={300} data={chartData}>
-                            <XAxis dataKey="x" domain={[12, 22]} tick={{ fontSize: 12 }}
-                                type="number" label={{ value: "Days", position: "insideBottomRight", dy: 10 }} />
-                            <YAxis ticks={[-0.1, 8]} type="number" />
-                            <Tooltip />
-                            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                            <Line type="monotone" label={<Label />} dataKey="y" stroke="#8884d8" />
-                        </LineChart>
-
-
-                    </ResponsiveContainer>
+                    <div className="card-fertilizer">
+                    <Chart
+                        className='chart'
+                        chartType="Bar"
+                        style={{ width: "100%" }}
+                        data={dataset}
+                        options={options}
+                        />
+                        </div>
                     <div className="weather">
                         {
                             spinner ? <Loader2 /> : (weather && weather.filter((item) => {
