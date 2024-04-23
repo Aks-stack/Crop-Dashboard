@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./fertilizer.css";
 import Quantity from './Quantity';
-import buttonChart from "../assets/Button.svg";
-import FertilizerIcon from "../assets/science_2022299.png";
-import { IoRainyOutline } from "react-icons/io5";
 import Sunny from "../assets/sun.png";
 import Rain from "../assets/rain.png";
 import Cloud from "../assets/cloud.png";
 import Loader from './Loader';
-import Slider from "react-slick";
+import Nitrogen from '../assets/nitrogen.png';
+import Phosphorus from '../assets/Phosphorus.png';
+import Potassium from '../assets/Potassium.png';
 
-// import "./slick-carousel/slick/slick.css";
-// import "./slick-carousel/slick/slick-theme.css";
-
+import LottieCat from "../assets/Animation - 1713784715836.json";
 
 import { Line, BarChart, Tooltip, Legend, LineChart, CartesianGrid, XAxis, ResponsiveContainer, YAxis, Bar } from "recharts";
 import axios from 'axios';
-import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import Loader2 from './Loader2';
 import { Chart } from "react-google-charts";
+import Lottie from 'lottie-react';
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-
 
 function Fertilizer({ Mode, latlong }) {
     const [serverip, setServerip] = useState(localStorage.getItem("server"));
@@ -31,15 +26,13 @@ function Fertilizer({ Mode, latlong }) {
     const [dataset, setDataset] = useState([["Day", "Rainfall"]]);
 
     const { state } = useLocation();
-    const [spinner, setSpinner] = useState(false);
-
-    // console.log("State ", state)
+    const [spinner, setSpinner] = useState(true);
 
     const options = {
         width: "450px",
-        curveType: "",
+        curveType: "ColumnChart",
         legend: {
-            position: "bottom",
+            position: 'top', alignment: 'end',
             textStyle: { color: Mode ? 'grey' : 'black' }
         },
         chartArea: { left: "10%", width: "85%", height: "70%" },
@@ -77,29 +70,6 @@ function Fertilizer({ Mode, latlong }) {
         };
         getData();
 
-<<<<<<< HEAD
-=======
-        // const getRain = async () => {
-        //     const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
-        //     const data = resp.data.daily
-
-        //     // const dataset = [["Age", "Weight"],]
-        //     // for (let i = 0; i < data.rain_sum.length; i++) {
-        //     //     // const currrObj = {
-        //     //     //     // name: data.time[i],
-        //     //     //     y: data.rain_sum[i],
-        //     //     //     x: (new Date(data.time[i])).getDate()
-        //     //     // }
-
-        //     //     dataset.push([(new Date(data.time[i])).getDate(), data.rain_sum[i]])
-        //     // }
-            
-        //     setChartdata()
-        //     console.log('rainfall',chartData);
-
-        //     // setTimeout(() => console.log(dataset), 200)
-        // }
-        // getRain();
         const getRain = async () => {
             const resp = await axios.get("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=rain_sum&past_days=2");
             const data = resp.data.daily
@@ -109,52 +79,66 @@ function Fertilizer({ Mode, latlong }) {
                 return [(new Date(data.time[index])).getDate(), item]
             })
             setDataset([...dataset, ...rainfall])
-            console.log("Charts", dataset);
+            console.log("Charts :", dataset);
         }
         getRain();
 
->>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
     }, []);
 
     const [progress1, setProgress1] = useState(state?.n);
     const [progress2, setProgress2] = useState(state?.p);
     const [progress3, setProgress3] = useState(state?.k);
 
+    const [qnty, setQnty] = useState(false);
+
+    const [npercent, setNpercent] = useState();
+    const [ppercent, setPpercent] = useState();
+    const [kpercent, setKpercent] = useState();
+
+
     const newArr = chartData.map((value) => value.y)
     // console.log(newArr);
-<<<<<<< HEAD
 
+    const handleQnty = () => {
+        let N = state?.n;
+        let P = state?.p;
+        let K = state?.k;
+        const thikness = 0.15;
+        const density = 1.5;
+        N = (N * thikness * density) / 10;
+        P = (P * thikness * density) / 10;
+        K = (K * thikness * density) / 10;
+        setNpercent(npercent / 100);
+        let fertilizerN = N / npercent;
+        setNpercent((fertilizerN * 100).toFixed(2));
 
-=======
->>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
+        setPpercent(ppercent / 100);
+        let fertilizerP = P / ppercent;
+        setPpercent((fertilizerP * 100).toFixed(2));
+
+        setKpercent(kpercent / 100);
+        let fertilizerK = K / kpercent;
+        setKpercent((fertilizerK * 100).toFixed(2));
+
+        setQnty(true);
+    }
+
 
     return (
         <div className='main'>
             <div className='title'>Fertilizer & Temperature prediction</div>
             <div className='bottom-fertilizer'>
                 <div className="info">
-<<<<<<< HEAD
-                    <ResponsiveContainer className="card-fertilizer" width="100%" height="60%" >
-                        <LineChart width={500} height={300} data={chartData}>
-                            <XAxis dataKey="x" domain={[12, 22]} tick={{ fontSize: 12 }}
-                                type="number" label={{ value: "Days", position: "insideBottomRight", dy: 10 }} />
-                            <YAxis ticks={[-0.1, 8]} type="number" />
-                            <Tooltip />
-                            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                            <Line type="monotone" label={<Label />} dataKey="y" stroke="#8884d8" />
-                        </LineChart>
-                    </ResponsiveContainer>
-=======
                     <div className="card-fertilizer">
-                    <Chart
-                        className='chart'
-                        chartType="Bar"
-                        style={{ width: "100%" }}
-                        data={dataset}
-                        options={options}
+                        <div>Rainfall prediction for 9 days</div>
+                        <Chart
+                            className='chart'
+                            chartType="Bar"
+                            style={{ width: "100%" }}
+                            data={dataset}
+                            options={options}
                         />
-                        </div>
->>>>>>> 3edd9ffe2601bde2ef00325a775e162f5c2eb9e0
+                    </div>
                     <div className="weather">
                         {
                             spinner ? <Loader2 /> : (
@@ -165,6 +149,9 @@ function Fertilizer({ Mode, latlong }) {
                                     return true
                                 }).
                                     map((val, index) => {
+                                        if (index < 1) {
+                                            return
+                                        }
                                         const date = new Date(val.time);
                                         return (
                                             <div className="weather-card" key={index}>
@@ -180,16 +167,56 @@ function Fertilizer({ Mode, latlong }) {
                             )
                         }
                     </div>
+                    <div className="fertilizer-qty">
+                        {
+                            qnty ?
+                                <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                    <div className='box'>
+                                        <img src={Nitrogen} height={50} alt="" />
+                                        <p>{npercent} kg/ha</p>
+                                    </div>
+                                    <div className='box'>
+                                        <img src={Phosphorus} height={40} alt="" />
+                                        <p>{ppercent} kg/ha</p>
+                                    </div>
+                                    <div className='box'>
+                                        <img src={Potassium} height={40} alt="" />
+                                        <p>{kpercent} kg/ha</p>
+                                    </div>
+                                </div>
+                                :
+                                <>
+                                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                        <input type="number" placeholder='N %' onChange={(e) => setNpercent(e.target.value)} />
+                                        <input type="number" placeholder='P %' onChange={(e) => setPpercent(e.target.value)} />
+                                        <input type="number" placeholder='K %' onChange={(e) => setKpercent(e.target.value)} />
+                                    </div>
+                                    <button onClick={handleQnty}>Submit</button>
+                                </>
+                        }
 
+                    </div>
                 </div>
                 <div className="loaders" >
                     <div className='progress-fertilizer-title'>
                         <p>Fertilizer Requirement <br /> Analysis for <u>{state?.name}</u></p>
-                        <img src={`/crops/${state?.name}.jpg`} alt="" height={50} width={50} />
+                        <img src={`/crops/${state?.name}.jpg`} alt={"dasdasda"} height={50} width={50} />
                     </div>
-                    <Quantity qnty={progress1} name={"N"} Mode={Mode} />
-                    <Quantity qnty={progress2} name={"P"} Mode={Mode} />
-                    <Quantity qnty={progress3} name={"K"} Mode={Mode} />
+                    {
+                        progress1 === undefined ?
+                            <div className="error">
+                                <Lottie animationData={LottieCat} style={{ height: "300px", width: "200px" }} loop={true} speed="1 !important" />
+                                <p>
+                                    Click on any Crop
+                                </p>
+                            </div>
+                            :
+                            <>
+                                <Quantity qnty={progress1} name={"N"} Mode={Mode} />
+                                <Quantity qnty={progress2} name={"P"} Mode={Mode} />
+                                <Quantity qnty={progress3} name={"K"} Mode={Mode} />
+                            </>
+                    }
                 </div>
             </div>
         </div >

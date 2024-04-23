@@ -24,7 +24,7 @@ function RightBar({ Mode, city, latlong }) {
     const [serverip, setServerip] = useState(localStorage.getItem("server"));
 
     const [request, setRequest] = useState([]);
-    const [predictarr, setPredictarr] = useState();
+    const [predictarr, setPredictarr] = useState([]);
     const [open, setOpen] = React.useState(false);
 
     const handleToClose = (event, reason) => {
@@ -32,7 +32,7 @@ function RightBar({ Mode, city, latlong }) {
         setOpen(false);
     };
 
-    const [predict, setPredict] = useState(predictarr?.length == 0 ? false : true);
+    const [predict, setPredict] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [response, setResponse] = useState(null);
     const [updateData1, setUpdateData1] = useState(data1);
@@ -44,9 +44,7 @@ function RightBar({ Mode, city, latlong }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setPredictarr(JSON.parse(localStorage.getItem("predict")))
         let socket = new WebSocket(`ws://${espip}/ws`)
-        console.log(`ws://${espip}/ws`);
 
         socket.onopen = () => {
             console.log("connection open");
@@ -70,12 +68,12 @@ function RightBar({ Mode, city, latlong }) {
         // console.log('Count updated:', count, response);
         setUpdateData1([...updateData1, { time: count, temp: response?.Temp, }])
         setUpdateData2([...updateData2, { time: count, N: response?.n, P: response?.p, K: response?.k }])
-        setUpdateData3([...updateData3, { time: count, temp: 27, humidity: 0 }])
+        setUpdateData3([...updateData3, { time: count, temp: response?.temp, humidity: response?.hum }])
         setUpdateData4([...updateData4, { time: count, moisture: response?.m }])
     }, [count]);
 
     const handlePredict = () => {
-        // setPredict(predictarr.length != 0 ? true : false);
+        setPredict(!predict);
         setSpinner(true);
         const getData = async () => {
 
@@ -92,16 +90,11 @@ function RightBar({ Mode, city, latlong }) {
                 request.push(temp)
                 request.push(moisture)
 
-                console.log(request);
-
                 const { data } = await axios.post(`http://${serverip}/api/predict-crop`, { data: request });
                 const data2 = data.data?.map((item) => {
                     return { ...item, probability: +item.probability.toFixed(2) }
                 })
                 setPredictarr(data2);
-                // console.log("Final Predict", predictarr);
-                let string = JSON.stringify(predictarr);
-                localStorage.setItem("predict", string);
             }
             setSpinner(false);
         }
@@ -121,7 +114,7 @@ function RightBar({ Mode, city, latlong }) {
         })
     }
 
-    console.log(predictarr);
+    console.log("Predictarr :", predictarr);
 
     return (
         <div className='right-container'>
@@ -143,7 +136,7 @@ function RightBar({ Mode, city, latlong }) {
                         vertical: "top",
                     }}
                     open={open}
-                    autoHideDuration={5000}
+                    autoHideDuration={2500}
                     message="Device connected"
                     onClose={handleToClose}
                 />
