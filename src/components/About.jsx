@@ -1,6 +1,11 @@
 import React from 'react'
 import './About.css'
 import Pic from '../assets/PXL_sq.jpg'
+import Sayan from '../assets/Sayan.jpg'
+import Rajib from '../assets/Rajib.jpeg'
+import Tanmana from '../assets/Tanmana.jpeg'
+import Arka from '../assets/Arka.jpeg'
+import Richa from '../assets/Richa.jpeg'
 import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
 
 export default function About() {
@@ -22,7 +27,7 @@ export default function About() {
                     </div>
                 </div>
                 <div className="pic-content">
-                    <img src={Pic} alt='/' />
+                    <img src={Rajib} alt='/' />
                     <p>
                         Name Name
                     </p>
@@ -32,7 +37,7 @@ export default function About() {
                 </div>
                 <div className="wraper">
                 <div className="pic-content">
-                    <img src="https://tovanidesign.com/wp-content/uploads/2019/02/C-_Users_Chrystina_Dropbox_tovani-design_size-examples-of-portraits_for-web_1-1-aspect-ratio-prints-at-square-for-social-media-for-web-photo-by-chrysti-tovani.jpg" alt='/' />
+                    <img src={Sayan} alt='/' />
                     <p>
                         Name Name
                     </p>
@@ -41,7 +46,7 @@ export default function About() {
                     </svg>
                 </div>
                 <div className="pic-content">
-                    <img src="https://i0.wp.com/danishapiro.com/wp-content/uploads/2022/03/Author-Photo-color-aspect-ratio-1-1.jpeg?ssl=1" alt='/' />
+                    <img src={Pic} alt='/' />
                     <p>
                         Name Name
                     </p>
@@ -50,7 +55,7 @@ export default function About() {
                     </svg>
                 </div>
                 <div className="pic-content">
-                    <img src="https://rockynook.com/wp-content/uploads/2015/10/Meyer_T_1to2.jpg" alt='/' />
+                    <img src={Tanmana} alt='/' />
                     <p>
                         Name Name
                     </p>
@@ -59,7 +64,7 @@ export default function About() {
                     </svg>
                 </div>
                 <div className="pic-content">
-                    <img src="https://sekonic.com/content/Blog/zuckerman_studio_lighting_image07.jpg" alt='/' />
+                    <img src={Arka} alt='/' />
                     <p>
                         Name Name
                     </p>
@@ -68,7 +73,7 @@ export default function About() {
                     </svg>
                 </div>
                 <div className="pic-content">
-                    <img src="https://eastsidepeople.org/wp-content/uploads/2023/02/Final-Renu-Gundala-Eastside-People-25663-001E-scaled-aspect-ratio-1-1.jpg" alt='/' />
+                    <img src={Richa} alt='/' />
                     <p>
                         Name Name
                     </p>
