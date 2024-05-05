@@ -1,10 +1,10 @@
 import React from 'react'
 import './About.css'
 import Pic from '../assets/PXL_sq.jpg'
-import Sayan from '../assets/Sayan.jpg'
-import Rajib from '../assets/Rajib2.jpeg'
+import Sayan from '../assets/Sayan2.png'
+import Rajib from '../assets/Rajib2.png'
 import Tanmana from '../assets/Tanmana2.jpeg'
-import Arka from '../assets/Arka2.jpg'
+import Arka from '../assets/Arka2.png'
 import Richa from '../assets/Richa2.jpg'
 import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
 
@@ -18,7 +18,7 @@ export default function About() {
             <div className="content">
                 <div className="card">
                     <div className="card-title">
-                        <p>About us: Revolutionizing Agriculture with IoT-Based Crop Recommender</p>
+                        <p>Revolutionizing Agriculture with IoT-Based Crop Recommender</p>
                     </div>
                     <div className="description">
                         <p>
@@ -27,7 +27,7 @@ export default function About() {
                     </div>
                 </div>
                 <div className="pic-content">
-                    <img src={Rajib} alt='/' style={{ objectFit: "cover" }} />
+                    <img src={Rajib} alt='/' style={{ objectFit: "cover", }} />
                     <p>
                         Rajib Lochan Nandi
                     </p>

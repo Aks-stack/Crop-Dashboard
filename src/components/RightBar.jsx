@@ -68,7 +68,7 @@ function RightBar({ Mode, city, latlong }) {
         // console.log('Count updated:', count, response);
         setUpdateData1([...updateData1, { time: count, temp: response?.Temp, }])
         setUpdateData2([...updateData2, { time: count, N: response?.n, P: response?.p, K: response?.k }])
-        setUpdateData3([...updateData3, { time: count, temp: (Math.random() * (38 - 30) + 30).toFixed(2), humidity: Math.random() * (80 - 60) + 60 }])
+        setUpdateData3([...updateData3, { time: count, temp: (Math.random() * (37 - 35) + 35).toFixed(2), humidity: Math.random() * (80 - 60) + 60 }])
         setUpdateData4([...updateData4, { time: count, moisture: response?.m }])
     }, [count]);
 
@@ -114,7 +114,7 @@ function RightBar({ Mode, city, latlong }) {
         })
     }
 
-    console.log("Predictarr :", predictarr);
+    // console.log("Predictarr :", predictarr);
 
     return (
         <div className='right-container'>
