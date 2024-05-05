@@ -43,23 +43,26 @@
 
 
 .card {
-    width: 60%;
+    width: 79%;
     min-width: 500px;
     max-height: 90%;
+    /* height: 250px; */
     border-radius: 10px;
     background-color: var(--body_chart);
     border: 1px solid #2b367416;
     padding: 10px;
-    margin-right: 20%;
+    /* margin-right: 20%; */
 }
 
 .card-title {
-    padding: 10px;
+    padding: 20px;
     font-size: 20px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .description {
-    text-align: left;
+    text-align: center;
     padding: 20px;
 }
 
@@ -92,6 +95,15 @@
         min-width: 0px;
         width: 90%;
     }
+
+    .card-title {
+        text-align: left;
+    }
+
+    .description {
+        text-align: left;
+    }
+
     .wraper {
         justify-content: center;
         justify-items: center;
