@@ -18,8 +18,8 @@ const data2 = [
 const data3 = [
     {
         time: 1,
-        temp: 5,
-        humidity: 18
+        temp: 34,
+        humidity: 65
     },
 ];
 
