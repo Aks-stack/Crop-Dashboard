@@ -7,8 +7,17 @@ import Tanmana from '../assets/Tanmana2.jpeg'
 import Arka from '../assets/Arka2.png'
 import Richa from '../assets/Richa2.jpg'
 import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
+import { useState } from 'react'
 
 export default function About() {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [hovered, setHovered] = useState(false);
+
+    const handleHover = (index) => {
+        setHoveredIndex(index);
+        setHovered(true);
+    };
+
     return (
         <div className='main'>
             <div className="title">
@@ -26,8 +35,10 @@ export default function About() {
                         </p>
                     </div>
                 </div>
-                <div className="pic-content">
-                    <img src={Rajib} alt='/' style={{ objectFit: "cover", }} />
+                <div className="pic-content"
+                    onMouseEnter={() => handleHover(0)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                    <img src={Rajib} alt='/'
+                        style={{ objectFit: "cover", transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 0 ? "grayscale(1)" : "none" : "none" }} />
                     <p>
                         Rajib Lochan Nandi
                     </p>
@@ -36,8 +47,11 @@ export default function About() {
                     </svg>
                 </div>
                 <div className="wraper">
-                    <div className="pic-content">
-                        <img src={Sayan} alt='/' />
+                    <div className="pic-content"
+                        onMouseEnter={() => handleHover(1)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                        <img src={Sayan} alt='/'
+                            style={{ transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 1 ? "grayscale(1)" : "none" : "none" }}
+                        />
                         <p>
                             Sayan Kar
                         </p>
@@ -47,8 +61,9 @@ export default function About() {
                             </svg>
                         </a>
                     </div>
-                    <div className="pic-content">
-                        <img src={Pic} alt='/' />
+                    <div className="pic-content" onMouseEnter={() => handleHover(2)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                        <img src={Pic} alt='/'
+                            style={{ transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 2 ? "grayscale(1)" : "none" : "none" }} />
                         <p>
                             Akshat Sinha
                         </p>
@@ -58,8 +73,10 @@ export default function About() {
                             </svg>
                         </a>
                     </div>
-                    <div className="pic-content">
-                        <img src={Tanmana} alt='/' />
+                    <div className="pic-content"
+                        onMouseEnter={() => handleHover(3)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                        <img src={Tanmana} alt='/'
+                            style={{ transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 3 ? "grayscale(1)" : "none" : "none" }} />
                         <p>
                             Tanmana Das
                         </p>
@@ -67,8 +84,10 @@ export default function About() {
                             <Linkedin width="20px" height="20px" fill='currentColor' />
                         </svg>
                     </div>
-                    <div className="pic-content">
-                        <img src={Arka} alt='/' />
+                    <div className="pic-content"
+                        onMouseEnter={() => handleHover(4)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                        <img src={Arka} alt='/'
+                            style={{ transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 4 ? "grayscale(1)" : "none" : "none" }} />
                         <p>
                             Arka Chowdhury
                         </p>
@@ -76,8 +95,10 @@ export default function About() {
                             <Linkedin width="20px" height="20px" fill='currentColor' />
                         </svg>
                     </div>
-                    <div className="pic-content">
-                        <img src={Richa} alt='/' />
+                    <div className="pic-content"
+                        onMouseEnter={() => handleHover(5)} onMouseLeave={() => { handleHover(-1); setHovered(false) }}>
+                        <img src={Richa} alt='/'
+                            style={{ transition: "0.4s ease-in-out", filter: hovered ? hoveredIndex !== 5 ? "grayscale(1)" : "none" : "none" }} />
                         <p>
                             Richa Sharma
                         </p>
