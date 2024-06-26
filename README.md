@@ -16,6 +16,8 @@ This project leverages the power of the Internet of Things (IoT) and machine lea
 
 ![Screenshot 2024-04-24 033446(2)](https://github.com/Aks-stack/Crop-Dashboard/assets/144483956/25733a1e-a317-43f3-8116-102b8e63ea1c)
 
+![IOT_Circuit](https://github.com/Aks-stack/Crop-Dashboard/assets/116670560/f7eb9144-4740-4de5-8570-afc95fc3b909)
+
 https://github.com/Aks-stack/Crop-Dashboard/assets/116670560/9c68511b-6d67-4476-9406-61c66367162d
 
 
